@@ -29,4 +29,11 @@
     <td align="center">Ricardo Nery</td>
     <td align="center"><a href="https://github.com/ricardonerys">@ricardonerys</a></td>
   </tr>
+  <tr>
+    <td align="center">
+      <img src="https://github.com/pep287.png" width="100px" style="border-radius:50%;" alt="Pedro Mota"/>
+    </td>
+    <td align="center">Pedro Mota</td>
+    <td align="center"><a href="https://github.com/pep287">@pep287</a></td>
+  </tr>
 </table>
