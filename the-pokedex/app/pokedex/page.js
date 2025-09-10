@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./page.module.css";
+import { saveFavorite } from "../../api/index";
 
 export default function Pokedex() {
   const [pokemons, setPokemons] = useState([]);
@@ -12,6 +13,21 @@ export default function Pokedex() {
       .then((res) => setPokemons(res.data.results))
       .catch((err) => console.error(err));
   }, []);
+
+  const handleSave = async (poke, id) => {
+    try {
+      const pokemonData = {
+        id: id,
+        name: poke.name,
+        image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
+      };
+      await saveFavorite(pokemonData);
+      alert(`${poke.name} salvo com sucesso!`);
+    } catch (error) {
+      alert("Erro ao salvar o Pokemon.");
+      console.error(error);
+    }
+  };
 
   return (
     <main className={styles.container}>
@@ -25,6 +41,9 @@ export default function Pokedex() {
             <div key={id} className={styles.card}>
               <img src={img} alt={poke.name} />
               <p>{poke.name}</p>
+             <button onClick={() => handleSave(poke, id)} className={styles.saveButton}>
+                Salvar
+              </button>
             </div>
           );
         })}

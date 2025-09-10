@@ -32,3 +32,19 @@
   transform: scale(1.05);
   cursor: pointer;
 }
+
+.saveButton {
+  margin-top: 8px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  background-color: #f31212;
+  color: #fff;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.saveButton:hover {
+  background-color: #05da3e;
+}
