@@ -23,6 +23,18 @@ export default function Home() {
 
       <Link href="/pokedex">Ir para Pokédex</Link>
 
+      <hr className={styles.divisor} />
+
+      {/* Sobre nós */}
+      <section className={styles.sobre}>
+        <h2>Sobre nós</h2>
+        <p>
+          Este projeto foi desenvolvido pelo nosso grupo com o objetivo de
+          aprender e praticar desenvolvimento web. A Pokédex traz informações
+          sobre os Pokémon de forma simples e divertida!
+        </p>
+      </section>
+
     </main>
   );
 }
