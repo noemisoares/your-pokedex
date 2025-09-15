@@ -48,3 +48,14 @@
 .saveButton:hover {
   background-color: #05da3e;
 }
+
+.home {
+  min-height: 100vh; /* ocupa a tela toda */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  background-color: red; /* fundo vermelho */
+}
