@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className={styles.home}>
+    <main className={styles.home}> style={{ backgroundColor: "red" }}
       <h1>Bem-vindo à Pokédex</h1>
 
       <p>
@@ -22,7 +22,7 @@ export default function Home() {
     </div>
 
       <Link href="/pokedex">Ir para Pokédex</Link>
-      
+
     </main>
   );
 }
