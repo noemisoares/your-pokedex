@@ -23,12 +23,12 @@ export default function Home() {
           height="200"
         />
       </div>
-      <div className={styles.banner}>
+      <div className={styles.pokedexBg}>
         <Image
           src="/images/pokedex-color.svg"
           alt="Pokedex"
-          width="200"
-          height="200"
+          width={500}
+          height={500}
         />
       </div>
 
