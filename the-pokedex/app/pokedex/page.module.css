@@ -6,7 +6,7 @@
   font-size: 2rem;
   text-align: center;
   margin-bottom: 20px;
-  color: #0b0b0b;
+  color: var(--primary);
 }
 
 .grid {
@@ -50,12 +50,12 @@
 }
 
 .home {
-  min-height: 100vh; /* ocupa a tela toda */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
 
-  background-color: red; /* fundo vermelho */
+  background-color: red;
 }
