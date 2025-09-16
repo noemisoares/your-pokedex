@@ -4,6 +4,24 @@
   padding: 20px;
 }
 
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #3b82f6;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-bottom: 20px;
+  transition: background-color 0.3s;
+}
+
+.backButton:hover {
+  background: #2563eb;
+}
+
 .pokemonCard {
   background: white;
   border-radius: 15px;
@@ -92,21 +110,49 @@
   flex-wrap: wrap;
   gap: 15px;
   justify-content: center;
+  align-items: center;
+}
+
+.evolutionContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .evolutionLink {
   background: #4caf50;
   color: white;
-  padding: 10px 20px;
-  border-radius: 25px;
+  padding: 15px 20px;
+  border-radius: 15px;
   text-decoration: none;
   font-weight: bold;
   text-transform: capitalize;
   transition: background-color 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 120px;
 }
 
 .evolutionLink:hover {
   background: #45a049;
+}
+
+.evolutionSprite {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.evolutionName {
+  font-size: 0.9rem;
+}
+
+.evolutionArrow {
+  font-size: 1.5rem;
+  color: #666;
+  font-weight: bold;
 }
 
 .loading {

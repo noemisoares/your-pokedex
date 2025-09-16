@@ -10,6 +10,7 @@ export default function PokemonDetail() {
   const [pokemon, setPokemon] = useState(null);
   const [species, setSpecies] = useState(null);
   const [evolutionChain, setEvolutionChain] = useState(null);
+  const [evolutionSprites, setEvolutionSprites] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -31,6 +32,24 @@ export default function PokemonDetail() {
           );
           setEvolutionChain(evolutionResponse.data);
 
+          const evolutions = getEvolutions(evolutionResponse.data);
+          const sprites = {};
+
+          for (const evolution of evolutions) {
+            try {
+              const pokemonData = await axios.get(
+                `https://pokeapi.co/api/v2/pokemon/${evolution.id}`
+              );
+              sprites[evolution.id] = pokemonData.data.sprites?.front_default;
+            } catch (error) {
+              console.error(
+                `Erro ao buscar sprite para ${evolution.name}:`,
+                error
+              );
+            }
+          }
+
+          setEvolutionSprites(sprites);
           setLoading(false);
         } catch (err) {
           console.error(err);
@@ -45,14 +64,17 @@ export default function PokemonDetail() {
   const getEvolutions = (chain) => {
     const evolutions = [];
 
-    const addEvolution = (pokemon) => {
+    const addEvolution = (pokemon, level = 0) => {
       evolutions.push({
         name: pokemon.species.name,
         id: pokemon.species.url.split("/")[6],
+        level: level,
       });
 
       if (pokemon.evolves_to.length > 0) {
-        pokemon.evolves_to.forEach((evolution) => addEvolution(evolution));
+        pokemon.evolves_to.forEach((evolution) =>
+          addEvolution(evolution, level + 1)
+        );
       }
     };
 
@@ -60,7 +82,7 @@ export default function PokemonDetail() {
       addEvolution(chain.chain);
     }
 
-    return evolutions;
+    return evolutions.sort((a, b) => a.level - b.level);
   };
 
   if (loading) {
@@ -75,6 +97,10 @@ export default function PokemonDetail() {
 
   return (
     <main className={styles.container}>
+      <Link href="/pokedex" className={styles.backButton}>
+        ← Voltar à Pokédex
+      </Link>
+
       <div className={styles.pokemonCard}>
         <h1 className={styles.title}>{pokemon.name}</h1>
         <img
@@ -119,14 +145,27 @@ export default function PokemonDetail() {
           <h3>Evoluções:</h3>
           <div className={styles.evolutionsList}>
             {evolutions && evolutions.length > 0 ? (
-              evolutions.map((evolution) => (
-                <Link
-                  key={evolution.id}
-                  href={`/pokedex/${evolution.id}`}
-                  className={styles.evolutionLink}
-                >
-                  {evolution.name}
-                </Link>
+              evolutions.map((evolution, index) => (
+                <div key={evolution.id} className={styles.evolutionContainer}>
+                  <Link
+                    href={`/pokedex/${evolution.id}`}
+                    className={styles.evolutionLink}
+                  >
+                    {evolutionSprites[evolution.id] && (
+                      <img
+                        src={evolutionSprites[evolution.id]}
+                        alt={evolution.name}
+                        className={styles.evolutionSprite}
+                      />
+                    )}
+                    <span className={styles.evolutionName}>
+                      {evolution.name}
+                    </span>
+                  </Link>
+                  {index < evolutions.length - 1 && (
+                    <span className={styles.evolutionArrow}>→</span>
+                  )}
+                </div>
               ))
             ) : (
               <p>Evoluções não disponíveis</p>
