@@ -50,12 +50,14 @@
 }
 
 .home {
+  position: relative; /* necessário p/ posicionar imagens dentro */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-
   background-color: red;
+  color: white; /* texto branco */
+  overflow: hidden; /* garante que imagem não "escape" da tela */
 }
