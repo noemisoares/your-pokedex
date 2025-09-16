@@ -23,7 +23,7 @@ export default function Home() {
 
       <Link href="/pokedex">Ir para Pokédex</Link>
 
-      <hr className={styles.divisor} />
+      
 
       <section className={styles.sobre}>
         <h2>Sobre nós</h2>
