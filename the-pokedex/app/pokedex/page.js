@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Link from "next/link";
 import styles from "./page.module.css";
 import { saveFavorite } from "../../api/index";
 
@@ -39,8 +40,10 @@ export default function Pokedex() {
 
           return (
             <div key={id} className={styles.card}>
-              <img src={img} alt={poke.name} />
-              <p>{poke.name}</p>
+              <Link href={`/pokedex/${id}`}>
+                <img src={img} alt={poke.name} />
+                <p>{poke.name}</p>
+              </Link>
               <button
                 onClick={() => handleSave(poke, id)}
                 className={styles.saveButton}
