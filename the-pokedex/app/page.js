@@ -20,6 +20,14 @@ export default function Home() {
           height="200"
         />
       </div>
+      <div className={styles.banner}>
+        <Image
+          src="/images/pokedex-color.svg"
+          alt="Pokedex"
+          width="200"
+          height="200"
+        />
+      </div>
 
       <Link href="/pokedex">Ir para Pokédex</Link>
 
