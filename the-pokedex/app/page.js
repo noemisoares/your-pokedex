@@ -9,7 +9,7 @@ export default function Home() {
       <div className={styles.titulo}>
         <h1>POKÉDEX</h1>
       </div>
-      <h2>POKÉDE</h2>
+
       <p>
         Explore informações sobre todos os Pokémon, descubra tipos, habilidades
         e muito mais!
