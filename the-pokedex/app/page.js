@@ -6,7 +6,10 @@ export default function Home() {
   return (
     <main className={styles.home}>
       <h1>Bem-vindo à</h1>
-      <h2>POKÉDEX</h2>
+      <div className={styles.titulo}>
+        <h1>POKÉDEX</h1>
+      </div>
+      <h2>POKÉDE</h2>
       <p>
         Explore informações sobre todos os Pokémon, descubra tipos, habilidades
         e muito mais!
