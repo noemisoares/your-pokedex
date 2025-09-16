@@ -1,71 +1,144 @@
 .container {
-  padding: 20px;
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .title {
-  font-size: 2rem;
   text-align: center;
-  margin-bottom: 20px;
-  color: var(--primary);
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #333;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  padding: 1rem 0;
 }
 
 .card {
-  text-align: center;
-  border: 1px solid #0b0b0b;
-  border-radius: 8px;
-  padding: 10px;
-  background-color: #f3f3f3;
-  transition: transform 0.2s ease;
-}
-
-.card p {
-  color: rgb(18, 18, 18);
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
 }
 
 .card:hover {
-  transform: scale(1.05);
-  cursor: pointer;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
 
-.saveButton {
-  margin-top: 8px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  background-color: #f31212;
-  color: #fff;
-  font-weight: bold;
-  transition: background-color 0.2s ease;
-}
-
-.saveButton:hover {
-  background-color: #05da3e;
-}
-
-.home {
- position: relative; 
-  min-height: 100vh;
+.cardLink {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  overflow: hidden; 
+  padding: 1rem;
+  text-decoration: none;
+  color: inherit;
 }
 
-.pokedexBg {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0.2; /* transparente pra não atrapalhar texto */
-  z-index: 0;
-  pointer-events: none; /* não interage com cliques */
+.pokemonImage {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 0.8rem;
+}
+
+.pokemonName {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0 0 0.8rem 0;
+  text-align: center;
+  color: #333;
+}
+
+.types {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 0.8rem;
+}
+
+.typeTag {
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.saveButton {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 0 0 12px 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+  margin-top: auto;
+  font-size: 0.9rem;
+}
+
+.saveButton:hover {
+  background: #c0392b;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 2rem;
+  color: #666;
+}
+
+@media (max-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+
+  .card {
+    min-height: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 0.8rem;
+  }
+
+  .card {
+    min-height: 200px;
+  }
+
+  .pokemonImage {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+
+  .pokemonName {
+    font-size: 0.9rem;
+  }
 }
