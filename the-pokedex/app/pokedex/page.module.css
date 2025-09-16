@@ -24,8 +24,8 @@
   transition: transform 0.2s ease;
 }
 
-.card p{
-    color: rgb(18, 18, 18);
+.card p {
+  color: rgb(18, 18, 18);
 }
 
 .card:hover {

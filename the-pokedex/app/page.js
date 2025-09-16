@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className={styles.home}> style={{ backgroundColor: "red" }}
+    <main className={styles.home}>
       <h1>Bem-vindo à Pokédex</h1>
 
       <p>
@@ -13,19 +13,18 @@ export default function Home() {
       </p>
 
       <div className={styles.banner}>
-        <img
-        src="https://pm1.aminoapps.com/6434/a5f7322cdf21c4de36c7e2c48c926e4c433fe5e4_hq.jpg"
-        alt="Pikachu"
-        width="200"
-        height="200"
+        <Image
+          src="/images/pikachu.png"
+          alt="Pikachu"
+          width="200"
+          height="200"
         />
-    </div>
+      </div>
 
       <Link href="/pokedex">Ir para Pokédex</Link>
 
       <hr className={styles.divisor} />
 
-      {/* Sobre nós */}
       <section className={styles.sobre}>
         <h2>Sobre nós</h2>
         <p>
@@ -34,7 +33,6 @@ export default function Home() {
           sobre os Pokémon de forma simples e divertida!
         </p>
       </section>
-
     </main>
   );
 }

@@ -41,7 +41,10 @@ export default function Pokedex() {
             <div key={id} className={styles.card}>
               <img src={img} alt={poke.name} />
               <p>{poke.name}</p>
-             <button onClick={() => handleSave(poke, id)} className={styles.saveButton}>
+              <button
+                onClick={() => handleSave(poke, id)}
+                className={styles.saveButton}
+              >
                 Salvar
               </button>
             </div>
