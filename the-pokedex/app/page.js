@@ -5,8 +5,8 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className={styles.home}>
-      <h1>Bem-vindo à Pokédex</h1>
-
+      <h1>Bem-vindo à</h1>
+      <h2>POKÉDEX</h2>
       <p>
         Explore informações sobre todos os Pokémon, descubra tipos, habilidades
         e muito mais!
