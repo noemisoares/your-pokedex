@@ -10,50 +10,30 @@ export default function PokemonDetail() {
   const [pokemon, setPokemon] = useState(null);
   const [species, setSpecies] = useState(null);
   const [evolutionChain, setEvolutionChain] = useState(null);
-  const [evolutionSprites, setEvolutionSprites] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (id) {
       const fetchPokemonData = async () => {
         try {
+          // Buscar dados do Pokémon específico
           const pokemonResponse = await axios.get(
             `https://pokeapi.co/api/v2/pokemon/${id}`
           );
           setPokemon(pokemonResponse.data);
 
+          // Buscar dados da espécie
           const speciesResponse = await axios.get(
             `https://pokeapi.co/api/v2/pokemon-species/${id}`
           );
           setSpecies(speciesResponse.data);
 
+          // Buscar cadeia de evolução
           const evolutionResponse = await axios.get(
             speciesResponse.data.evolution_chain.url
           );
           setEvolutionChain(evolutionResponse.data);
 
-          const evolutions = getEvolutions(evolutionResponse.data);
-          const sprites = {};
-
-          for (const evolution of evolutions) {
-            try {
-              const animatedSprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${evolution.id}.gif`;
-
-              const staticSprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/${evolution.id}.png`;
-
-              sprites[evolution.id] = {
-                animated: animatedSprite,
-                static: staticSprite,
-              };
-            } catch (error) {
-              console.error(
-                `Erro ao buscar sprite para ${evolution.name}:`,
-                error
-              );
-            }
-          }
-
-          setEvolutionSprites(sprites);
           setLoading(false);
         } catch (err) {
           console.error(err);
@@ -95,10 +75,12 @@ export default function PokemonDetail() {
   };
 
   const getEvolutionSprite = (evolutionId) => {
-    return (
-      evolutionSprites[evolutionId]?.animated ||
-      evolutionSprites[evolutionId]?.static
-    );
+    // Retorna o sprite animado das evoluções
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${evolutionId}.gif`;
+  };
+
+  const capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
   if (loading) {
@@ -118,7 +100,7 @@ export default function PokemonDetail() {
       </Link>
 
       <div className={styles.pokemonCard}>
-        <h1 className={styles.title}>{pokemon.name}</h1>
+        <h1 className={styles.title}>{capitalize(pokemon.name)}</h1>
         <img
           src={getPokemonSprite(id)}
           alt={pokemon.name}
@@ -133,7 +115,7 @@ export default function PokemonDetail() {
           {pokemon.stats && pokemon.stats.length > 0 ? (
             pokemon.stats.map((stat) => (
               <div key={stat.stat.name} className={styles.statItem}>
-                <span>{stat.stat.name.replace("-", " ")}:</span>
+                <span>{capitalize(stat.stat.name.replace("-", " "))}:</span>
                 <span>{stat.base_stat}</span>
               </div>
             ))
@@ -148,7 +130,7 @@ export default function PokemonDetail() {
             {pokemon.moves && pokemon.moves.length > 0 ? (
               pokemon.moves.slice(0, 10).map((moveData) => (
                 <span key={moveData.move.name} className={styles.moveItem}>
-                  {moveData.move.name.replace("-", " ")}
+                  {capitalize(moveData.move.name.replace("-", " "))}
                 </span>
               ))
             ) : (
@@ -176,7 +158,7 @@ export default function PokemonDetail() {
                       }}
                     />
                     <span className={styles.evolutionName}>
-                      {evolution.name}
+                      {capitalize(evolution.name)}
                     </span>
                   </Link>
                   {index < evolutions.length - 1 && (
