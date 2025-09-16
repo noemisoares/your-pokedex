@@ -37,10 +37,14 @@ export default function PokemonDetail() {
 
           for (const evolution of evolutions) {
             try {
-              const pokemonData = await axios.get(
-                `https://pokeapi.co/api/v2/pokemon/${evolution.id}`
-              );
-              sprites[evolution.id] = pokemonData.data.sprites?.front_default;
+              const animatedSprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${evolution.id}.gif`;
+
+              const staticSprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/${evolution.id}.png`;
+
+              sprites[evolution.id] = {
+                animated: animatedSprite,
+                static: staticSprite,
+              };
             } catch (error) {
               console.error(
                 `Erro ao buscar sprite para ${evolution.name}:`,
@@ -85,6 +89,18 @@ export default function PokemonDetail() {
     return evolutions.sort((a, b) => a.level - b.level);
   };
 
+  const getPokemonSprite = (pokemonId) => {
+    const animatedSprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${pokemonId}.gif`;
+    return animatedSprite;
+  };
+
+  const getEvolutionSprite = (evolutionId) => {
+    return (
+      evolutionSprites[evolutionId]?.animated ||
+      evolutionSprites[evolutionId]?.static
+    );
+  };
+
   if (loading) {
     return <div className={styles.loading}>Carregando...</div>;
   }
@@ -104,12 +120,12 @@ export default function PokemonDetail() {
       <div className={styles.pokemonCard}>
         <h1 className={styles.title}>{pokemon.name}</h1>
         <img
-          src={
-            pokemon.sprites?.front_default ||
-            pokemon.sprites?.other?.["official-artwork"]?.front_default
-          }
+          src={getPokemonSprite(id)}
           alt={pokemon.name}
           className={styles.pokemonImage}
+          onError={(e) => {
+            e.target.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/${id}.png`;
+          }}
         />
 
         <div className={styles.stats}>
@@ -151,13 +167,14 @@ export default function PokemonDetail() {
                     href={`/pokedex/${evolution.id}`}
                     className={styles.evolutionLink}
                   >
-                    {evolutionSprites[evolution.id] && (
-                      <img
-                        src={evolutionSprites[evolution.id]}
-                        alt={evolution.name}
-                        className={styles.evolutionSprite}
-                      />
-                    )}
+                    <img
+                      src={getEvolutionSprite(evolution.id)}
+                      alt={evolution.name}
+                      className={styles.evolutionSprite}
+                      onError={(e) => {
+                        e.target.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/${evolution.id}.png`;
+                      }}
+                    />
                     <span className={styles.evolutionName}>
                       {evolution.name}
                     </span>
