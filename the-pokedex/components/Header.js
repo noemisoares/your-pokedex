@@ -29,16 +29,10 @@ export function Header() {
       <nav className="nav">
         <div className="logo">
           <Link href="/">
-            <Image
-              src="/logo.png"
-              alt="Logo"
-              width={50}
-              height={50}
-            />
+            <Image src="/logo.png" alt="Logo" width={50} height={50} />
           </Link>
         </div>
 
-        {/* MENU */}
         <ul className="nav-list">
           <li>
             <Link href="/">Home</Link>
@@ -67,17 +61,6 @@ export function Header() {
               height={26}
             />
           </button>
-
-          <Link href="/login">
-            <div className="user-icon">
-              <Image
-                src="/icons/user.png"
-                alt="Usuário"
-                width={32}
-                height={32}
-              />
-            </div>
-          </Link>
         </div>
       </nav>
     </header>

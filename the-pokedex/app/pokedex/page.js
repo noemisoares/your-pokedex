@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import styles from "./page.module.css";
-import { saveFavorite } from "../../api/index";
+import { savePokemon } from "../../api/index";
+import TeamBuilder from "@/components/TeamBuilder";
 
 export default function Pokedex() {
   const [pokemons, setPokemons] = useState([]);
@@ -58,7 +59,7 @@ export default function Pokedex() {
         name: poke.name,
         image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/${id}.png`,
       };
-      await saveFavorite(pokemonData);
+      await savePokemon(pokemonData);
       alert(`${capitalize(poke.name)} salvo com sucesso!`);
     } catch (error) {
       alert("Erro ao salvar o Pokemon.");
@@ -100,6 +101,8 @@ export default function Pokedex() {
 
   return (
     <main className={styles.container}>
+      <TeamBuilder />
+
       <h1 className={styles.title}>Pokédex</h1>
       <div className={styles.grid}>
         {pokemons.map((poke) => {

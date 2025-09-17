@@ -1,0 +1,59 @@
+.container {
+  font-family: Arial, sans-serif;
+  padding: 1rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.inputTrainer {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 300px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, 80px);
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.slot {
+  width: 80px;
+  height: 80px;
+  border: 2px dashed #aaa;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9f9f9;
+}
+
+.slot img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.buttonSave {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: #c0392b;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.buttonSave:hover {
+  background-color: #c0392b;
+}
