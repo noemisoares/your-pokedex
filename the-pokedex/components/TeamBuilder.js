@@ -5,7 +5,7 @@ import styles from "./teamBuilder.module.css";
 
 const TeamBuilder = forwardRef((props, ref) => {
   const [team, setTeam] = useState([null, null, null, null, null, null]);
-  const [trainerName, setTrainerName] = useState("");
+  const [teamName, setTeamName] = useState("");
 
   function addPokemon(pokemon) {
     const index = team.findIndex((p) => p === null);
@@ -16,15 +16,15 @@ const TeamBuilder = forwardRef((props, ref) => {
   }
 
   async function saveTeam() {
-    if (!trainerName) {
-      alert("Digite o nome do treinador!");
+    if (!teamName) {
+      alert("Digite o nome do time!");
       return;
     }
     await createTeam(
-      trainerName,
+      teamName,
       team.filter((p) => p !== null)
     );
-    alert(`Time de ${trainerName} salvo com sucesso!`);
+    alert(`Time de ${teamName} salvo com sucesso!`);
   }
 
   useImperativeHandle(ref, () => ({
@@ -36,9 +36,9 @@ const TeamBuilder = forwardRef((props, ref) => {
       <h2 className={styles.title}>Seu Time</h2>
       <input
         type="text"
-        placeholder="Nome do treinador"
-        value={trainerName}
-        onChange={(e) => setTrainerName(e.target.value)}
+        placeholder="Nome do time"
+        value={teamName}
+        onChange={(e) => setTeamName(e.target.value)}
         className={styles.inputTrainer}
       />
       <div className={styles.grid}>

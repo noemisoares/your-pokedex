@@ -28,12 +28,12 @@
 .slot {
   width: 80px;
   height: 80px;
-  border: 2px dashed #aaa;
+  border: 2px dashed #cc4b4b;
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f9f9f9;
+  background-color: var(--secondary);
 }
 
 .slotImage {
@@ -50,8 +50,9 @@
   cursor: pointer;
   font-weight: bold;
   transition: background-color 0.2s;
+  color: var(--primary);
 }
 
 .buttonSave:hover {
-  background-color: #c0392b;
+  background-color: #164162;
 }

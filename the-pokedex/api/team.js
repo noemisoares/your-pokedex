@@ -1,12 +1,12 @@
 import instance from "./index";
 
-export async function createTeam(trainerName, pokemons) {
-  return instance.post("/classes/Team", { trainerName, pokemons });
+export async function createTeam(teamName, pokemons) {
+  return instance.post("/classes/Team", { teamName, pokemons });
 }
 
-export async function getTeamsByTrainer(trainerName) {
+export async function getTeamsByTrainer(teamName) {
   return instance.get(
-    `/classes/Team?where=${encodeURIComponent(JSON.stringify({ trainerName }))}`
+    `/classes/Team?where=${encodeURIComponent(JSON.stringify({ teamName }))}`
   );
 }
 
