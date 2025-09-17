@@ -16,19 +16,16 @@ export default function PokemonDetail() {
     if (id) {
       const fetchPokemonData = async () => {
         try {
-          // Buscar dados do Pokémon específico
           const pokemonResponse = await axios.get(
             `https://pokeapi.co/api/v2/pokemon/${id}`
           );
           setPokemon(pokemonResponse.data);
 
-          // Buscar dados da espécie
           const speciesResponse = await axios.get(
             `https://pokeapi.co/api/v2/pokemon-species/${id}`
           );
           setSpecies(speciesResponse.data);
 
-          // Buscar cadeia de evolução
           const evolutionResponse = await axios.get(
             speciesResponse.data.evolution_chain.url
           );
