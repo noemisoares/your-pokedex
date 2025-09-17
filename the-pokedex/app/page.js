@@ -6,7 +6,8 @@ export default function Home() {
   return (
     <main className={styles.home}>
       <h1>Bem-vindo à</h1>
-        <h1>POKÉDEX</h1>
+        
+        <h1 className={styles.titulo}>POKÉDEX</h1>
       
 
       <p>
@@ -22,7 +23,7 @@ export default function Home() {
           height="200"
         />
       </div>
-      
+
       <div className={styles.pokedexBg}>
         <Image
           src="/images/pokedex-color.svg"
