@@ -1,14 +1,14 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react"; // ✅ import useRef
 import axios from "axios";
 import Link from "next/link";
 import styles from "./page.module.css";
-import { savePokemon } from "../../api/index";
 import TeamBuilder from "@/components/TeamBuilder";
 
 export default function Pokedex() {
   const [pokemons, setPokemons] = useState([]);
   const [loading, setLoading] = useState(true);
+  const teamBuilderRef = useRef(); // ✅ criar ref
 
   useEffect(() => {
     const fetchPokemonData = async () => {
@@ -52,18 +52,15 @@ export default function Pokedex() {
     fetchPokemonData();
   }, []);
 
-  const handleSave = async (poke, id) => {
-    try {
-      const pokemonData = {
-        id: id,
-        name: poke.name,
-        image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/${id}.png`,
-      };
-      await savePokemon(pokemonData);
-      alert(`${capitalize(poke.name)} salvo com sucesso!`);
-    } catch (error) {
-      alert("Erro ao salvar o Pokemon.");
-      console.error(error);
+  const handleAddToTeam = (poke) => {
+    const pokeData = {
+      id: poke.id,
+      name: poke.name,
+      image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/${poke.id}.png`,
+    };
+
+    if (teamBuilderRef.current) {
+      teamBuilderRef.current.addPokemon(pokeData);
     }
   };
 
@@ -101,7 +98,7 @@ export default function Pokedex() {
 
   return (
     <main className={styles.container}>
-      <TeamBuilder />
+      <TeamBuilder ref={teamBuilderRef} />
 
       <h1 className={styles.title}>Pokédex</h1>
       <div className={styles.grid}>
@@ -134,11 +131,12 @@ export default function Pokedex() {
                   ))}
                 </div>
               </Link>
+
               <button
-                onClick={() => handleSave(poke, poke.id)}
+                onClick={() => handleAddToTeam(poke)}
                 className={styles.saveButton}
               >
-                Salvar
+                Adicionar ao Time
               </button>
             </div>
           );

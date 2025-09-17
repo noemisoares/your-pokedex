@@ -29,10 +29,10 @@ export async function savePokemon(pokemon) {
   }
 }
 
-export async function saveTeam(trainerName, pokemons) {
+export async function saveTeam(teamName, pokemons) {
   try {
     const response = await instance.post("/classes/Team", {
-      trainerName,
+      teamName,
       pokemons,
     });
     return response.data;
