@@ -1,6 +1,6 @@
 .home {
   background-color: rgba(182, 7, 7, 0);
-  color: rgb(255, 255, 255);
+  color:var(primary);
 }
 .titulo {
   font-size:200%;
