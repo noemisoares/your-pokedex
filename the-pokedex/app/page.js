@@ -6,9 +6,8 @@ export default function Home() {
   return (
     <main className={styles.home}>
       <h1>Bem-vindo à</h1>
-      <div className={styles.titulo}>
         <h1>POKÉDEX</h1>
-      </div>
+      
 
       <p>
         Explore informações sobre todos os Pokémon, descubra tipos, habilidades
@@ -23,6 +22,7 @@ export default function Home() {
           height="200"
         />
       </div>
+      
       <div className={styles.pokedexBg}>
         <Image
           src="/images/pokedex-color.svg"
