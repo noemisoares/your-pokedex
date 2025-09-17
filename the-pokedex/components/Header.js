@@ -44,7 +44,7 @@ export function Header() {
             <a href="#how">Como Funciona</a>
           </li>
           <li>
-            <a href="#contact">Contato</a>
+            <Link href="/pokedex">Pokedex</Link>
           </li>
         </ul>
 

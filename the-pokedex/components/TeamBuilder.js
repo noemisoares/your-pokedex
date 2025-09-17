@@ -3,6 +3,37 @@ import Image from "next/image";
 import { createTeam } from "../api/team";
 import styles from "./teamBuilder.module.css";
 
+const PokeballIcon = ({ size = 40 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 100 100"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M2,50 a48,48 0 1,1 96,0"
+      fill="#FF0000"
+      stroke="black"
+      strokeWidth="4"
+    />
+    <path
+      d="M2,50 a48,48 0 1,0 96,0"
+      fill="#FFFFFF"
+      stroke="black"
+      strokeWidth="4"
+    />
+    <rect x="0" y="45" width="100" height="10" fill="black" />
+    <circle
+      cx="50"
+      cy="50"
+      r="10"
+      fill="white"
+      stroke="black"
+      strokeWidth="3"
+    />
+  </svg>
+);
+
 const TeamBuilder = forwardRef((props, ref) => {
   const [team, setTeam] = useState([null, null, null, null, null, null]);
   const [teamName, setTeamName] = useState("");
@@ -12,6 +43,13 @@ const TeamBuilder = forwardRef((props, ref) => {
     if (index === -1) return alert("Seu time já tem 6 pokémons!");
     const newTeam = [...team];
     newTeam[index] = pokemon;
+    setTeam(newTeam);
+  }
+
+  function removePokemon(index) {
+    const newTeam = [...team];
+    newTeam.splice(index, 1);
+    newTeam.push(null);
     setTeam(newTeam);
   }
 
@@ -51,9 +89,10 @@ const TeamBuilder = forwardRef((props, ref) => {
                 width={70}
                 height={70}
                 className={styles.slotImage}
+                onClick={() => removePokemon(i)}
               />
             ) : (
-              <span>???</span>
+              <PokeballIcon color="#FF1C1C" />
             )}
           </div>
         ))}
