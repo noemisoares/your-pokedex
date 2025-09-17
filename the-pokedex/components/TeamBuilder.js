@@ -1,4 +1,5 @@
 import { useState, forwardRef, useImperativeHandle } from "react";
+import Image from "next/image";
 import { createTeam } from "../api/team";
 import styles from "./teamBuilder.module.css";
 
@@ -43,7 +44,17 @@ const TeamBuilder = forwardRef((props, ref) => {
       <div className={styles.grid}>
         {team.map((p, i) => (
           <div key={i} className={styles.slot}>
-            {p ? <img src={p.image} alt={p.name} /> : <span>???</span>}
+            {p ? (
+              <Image
+                src={p.image}
+                alt={p.name}
+                width={70}
+                height={70}
+                className={styles.slotImage}
+              />
+            ) : (
+              <span>???</span>
+            )}
           </div>
         ))}
       </div>
@@ -53,5 +64,7 @@ const TeamBuilder = forwardRef((props, ref) => {
     </div>
   );
 });
+
+TeamBuilder.displayName = "TeamBuilder";
 
 export default TeamBuilder;

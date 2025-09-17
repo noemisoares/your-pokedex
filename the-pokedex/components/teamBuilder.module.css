@@ -36,11 +36,9 @@
   background-color: #f9f9f9;
 }
 
-.slot img {
-  width: 70px;
-  height: 70px;
-  object-fit: contain;
+.slotImage {
   border-radius: 8px;
+  object-fit: contain;
 }
 
 .buttonSave {
