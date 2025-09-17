@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className={styles.home}>
-      <h1>Bem-vindo à</h1>
+      <h1 className={styles.titulinho}>Bem-vindo à</h1>
         
         <h1 className={styles.titulo}>POKÉDEX</h1>
       
