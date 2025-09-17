@@ -1,12 +1,31 @@
 .home {
   background-color: rgba(182, 7, 7, 0);
   color:var(--primary);
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+ 
+  
+  justify-content: center;
+  overflow: hidden;
 }
+
 .titulinho {
   font-size:60px;
-  margin-left: 20px;
+  margin-left: 15px;
 }
 .titulo {
   font-size:150px;
-  margin-left: 100px;
+  margin-left: 90px;
+}
+
+.pokedexBg {
+  position: absolute;
+  top: 60%;
+  left: 70%;
+  transform: translate(-40%, -50%);
+  opacity: 1.0;
+  z-index: 0;
+  pointer-events: none;
 }

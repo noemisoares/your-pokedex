@@ -15,14 +15,14 @@ body {
 :root {
   --primary: #020202;
   --secondary: #ffffff;
-  --bg: #ffffff;
-  --text: #111111;
+  --bg: #ff0000;
+  --text: #000000;
 }
 
 .dark {
   --primary: #e8ecf8;
   --secondary: #ffffff;
-  --bg: #1b1b1b;
+  --bg: #610000;
   --text: #e2e8f0;
 }
 

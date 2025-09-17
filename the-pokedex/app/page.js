@@ -28,8 +28,8 @@ export default function Home() {
         <Image
           src="/images/pokedex-color.svg"
           alt="Pokedex"
-          width={500}
-          height={500}
+          width={1100}
+          height={1100}
         />
       </div>
 
