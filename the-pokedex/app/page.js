@@ -35,8 +35,6 @@ export default function Home() {
 
       <Link href="/pokedex">Ir para Pokédex</Link>
 
-      
-
       <section className={styles.sobre}>
         <h2>Sobre nós</h2>
         <p>

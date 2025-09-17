@@ -8,7 +8,7 @@
   text-align: center;
   font-size: 2.5rem;
   margin-bottom: 2rem;
-  color: #333;
+  color: var(--primary);
 }
 
 .grid {
@@ -98,7 +98,7 @@
   text-align: center;
   font-size: 1.2rem;
   padding: 2rem;
-  color: #666;
+  color: var(--primary);
 }
 
 @media (max-width: 1200px) {
@@ -141,4 +141,10 @@
   .pokemonName {
     font-size: 0.9rem;
   }
+}
+
+.teams {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
 }

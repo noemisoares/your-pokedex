@@ -1,14 +1,15 @@
 "use client";
-import { useEffect, useState, useRef } from "react"; // ✅ import useRef
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import Link from "next/link";
 import styles from "./page.module.css";
 import TeamBuilder from "@/components/TeamBuilder";
+import Teams from "@/components/Teams";
 
 export default function Pokedex() {
   const [pokemons, setPokemons] = useState([]);
   const [loading, setLoading] = useState(true);
-  const teamBuilderRef = useRef(); // ✅ criar ref
+  const teamBuilderRef = useRef();
 
   useEffect(() => {
     const fetchPokemonData = async () => {
@@ -98,7 +99,10 @@ export default function Pokedex() {
 
   return (
     <main className={styles.container}>
-      <TeamBuilder ref={teamBuilderRef} />
+      <div className={styles.teams}>
+        <TeamBuilder ref={teamBuilderRef} />
+        <Teams />
+      </div>
 
       <h1 className={styles.title}>Pokédex</h1>
       <div className={styles.grid}>

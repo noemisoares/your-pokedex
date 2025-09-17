@@ -10,10 +10,16 @@ export async function getTeamsByTrainer(teamName) {
   );
 }
 
+//aqui pra will >>>
 export async function updateTeam(teamId, pokemons) {
   return instance.put(`/classes/Team/${teamId}`, { pokemons });
 }
 
 export async function deleteTeam(teamId) {
   return instance.delete(`/classes/Team/${teamId}`);
+}
+//aqui pra will ^^^
+
+export async function getAllTeams() {
+  return instance.get("/classes/Team");
 }
