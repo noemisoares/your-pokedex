@@ -8,12 +8,14 @@ import Teams from "@/components/Teams";
 
 export default function Pokedex() {
   const [pokemons, setPokemons] = useState([]);
+  const [filteredPokemons, setFilteredPokemons] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedType, setSelectedType] = useState("");
   const teamBuilderRef = useRef();
 
   const [editingTeamId, setEditingTeamId] = useState(null);
 
-  
   const handleEditTeam = (team) => {
     if (teamBuilderRef.current) {
       teamBuilderRef.current.loadTeam(team.pokemons, team.teamName);
@@ -53,6 +55,7 @@ export default function Pokedex() {
         );
 
         setPokemons(pokemonWithDetails);
+        setFilteredPokemons(pokemonWithDetails);
         setLoading(false);
       } catch (err) {
         console.error(err);
@@ -62,6 +65,24 @@ export default function Pokedex() {
 
     fetchPokemonData();
   }, []);
+
+  useEffect(() => {
+    let filtered = pokemons;
+
+    if (searchTerm) {
+      filtered = filtered.filter((pokemon) =>
+        pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    if (selectedType) {
+      filtered = filtered.filter((pokemon) =>
+        pokemon.types.some((typeInfo) => typeInfo.type.name === selectedType)
+      );
+    }
+
+    setFilteredPokemons(filtered);
+  }, [searchTerm, selectedType, pokemons]);
 
   const handleAddToTeam = (poke) => {
     const pokeData = {
@@ -103,6 +124,27 @@ export default function Pokedex() {
     return typeColors[type] || "#68A090";
   };
 
+  const allTypes = [
+    "normal",
+    "fire",
+    "water",
+    "electric",
+    "grass",
+    "ice",
+    "fighting",
+    "poison",
+    "ground",
+    "flying",
+    "psychic",
+    "bug",
+    "rock",
+    "ghost",
+    "dragon",
+    "dark",
+    "steel",
+    "fairy",
+  ];
+
   if (loading) {
     return <div className={styles.loading}>Carregando Pokémon...</div>;
   }
@@ -115,8 +157,31 @@ export default function Pokedex() {
       </div>
 
       <h1 className={styles.title}>Pokédex</h1>
+
+      <div className={styles.filters}>
+        <input
+          type="text"
+          placeholder="Buscar Pokémon..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className={styles.searchInput}
+        />
+        <select
+          value={selectedType}
+          onChange={(e) => setSelectedType(e.target.value)}
+          className={styles.typeFilter}
+        >
+          <option value="">Todos os tipos</option>
+          {allTypes.map((type) => (
+            <option key={type} value={type}>
+              {capitalize(type)}
+            </option>
+          ))}
+        </select>
+      </div>
+
       <div className={styles.grid}>
-        {pokemons.map((poke) => {
+        {filteredPokemons.map((poke) => {
           const img = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/${poke.id}.png`;
 
           return (
