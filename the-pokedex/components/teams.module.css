@@ -15,7 +15,14 @@
   border-radius: 8px;
   background-color: var(--secondary);
   color: var(--primary);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
+.teamCard:hover{
+  transform: translateY(-10px); 
+  
+  box-shadow: 30px 30px 30px hsla(0, 0%, 0%, 0.832); 
+}
+
 
 .teamName {
   font-weight: bold;
