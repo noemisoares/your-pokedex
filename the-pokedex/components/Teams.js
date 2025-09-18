@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { getTeamsByTrainer, getAllTeams, deleteTeam } from "../api/team";
 import styles from "./teams.module.css";
-import { Trash } from "lucide-react";
+import { Trash, Pencil } from "lucide-react";
 
 const Times = ({ trainerName, onEditTeam }) => {
   const [teams, setTeams] = useState([]);
@@ -34,6 +34,7 @@ const Times = ({ trainerName, onEditTeam }) => {
   if (!teams.length) return <div>Nenhum time encontrado.</div>;
 
    const handleDelete = async (teamId, teamName) => {
+    e.stopPropagation();
     const confirmDelete = window.confirm(
       `Tem certeza de que deseja deletar o time "${teamName}" ?`
     );
@@ -54,8 +55,18 @@ const Times = ({ trainerName, onEditTeam }) => {
   return (
     <div className={styles.timesContainer}>
       {teams.map((team) => (
-        <div key={team.objectId} className={styles.teamCard} onClick={() => onEditTeam && onEditTeam(team)}>
+        <div key={team.objectId} className={styles.teamCard}>
           <h3 className={styles.teamName}>{team.teamName}</h3>
+
+          <button
+            className={styles.editButton}
+            onClick={(e) => {
+            e.stopPropagation(); // impede que clique no card dispare outros eventos
+            onEditTeam && onEditTeam(team);
+            }}
+          >
+            <Pencil size={20} color="blue" />
+          </button>
           <button
             className={styles.deleteButton}
             onClick={(e) => handleDelete(team.objectId, team.teamName, e)}
@@ -68,6 +79,7 @@ const Times = ({ trainerName, onEditTeam }) => {
                 <Image src={p.image} alt={p.name} width={40} height={40} />
                 <span>{p.name}</span>
               </div>
+
             ))}
           </div>
         </div>
