@@ -11,6 +11,16 @@ export default function Pokedex() {
   const [loading, setLoading] = useState(true);
   const teamBuilderRef = useRef();
 
+  const [editingTeamId, setEditingTeamId] = useState(null);
+
+  // função que é passada pro Times
+  const handleEditTeam = (team) => {
+    if (teamBuilderRef.current) {
+      teamBuilderRef.current.loadTeam(team.pokemons, team.teamName);
+      setEditingTeamId(team.objectId);
+    }
+  };
+
   useEffect(() => {
     const fetchPokemonData = async () => {
       try {
@@ -100,8 +110,8 @@ export default function Pokedex() {
   return (
     <main className={styles.container}>
       <div className={styles.teams}>
-        <TeamBuilder ref={teamBuilderRef} />
-        <Teams />
+        <TeamBuilder ref={teamBuilderRef} editingTeamId={editingTeamId}/>
+        <Teams onEditTeam={handleEditTeam} />
       </div>
 
       <h1 className={styles.title}>Pokédex</h1>

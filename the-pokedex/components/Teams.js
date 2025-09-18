@@ -4,7 +4,7 @@ import Image from "next/image";
 import { getTeamsByTrainer, getAllTeams } from "../api/team";
 import styles from "./teams.module.css";
 
-const Times = ({ trainerName }) => {
+const Times = ({ trainerName, onEditTeam }) => {
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -35,7 +35,7 @@ const Times = ({ trainerName }) => {
   return (
     <div className={styles.timesContainer}>
       {teams.map((team) => (
-        <div key={team.objectId} className={styles.teamCard}>
+        <div key={team.objectId} className={styles.teamCard} onClick={() => onEditTeam && onEditTeam(team)}>
           <h3 className={styles.teamName}>{team.teamName}</h3>
           <div className={styles.pokemons}>
             {team.pokemons.map((p, i) => (

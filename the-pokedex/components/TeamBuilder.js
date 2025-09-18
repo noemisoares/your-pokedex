@@ -38,6 +38,18 @@ const TeamBuilder = forwardRef((props, ref) => {
   const [team, setTeam] = useState([null, null, null, null, null, null]);
   const [teamName, setTeamName] = useState("");
 
+function loadTeam(pokemons, name) {
+  const fullTeam = [...pokemons];
+  while (fullTeam.length < 6) {
+    fullTeam.push(null);
+  }
+
+  setTeam(fullTeam);
+  setTeamName(name);
+}
+
+  
+
   function addPokemon(pokemon) {
     const index = team.findIndex((p) => p === null);
     if (index === -1) return alert("Seu time já tem 6 pokémons!");
@@ -67,6 +79,7 @@ const TeamBuilder = forwardRef((props, ref) => {
 
   useImperativeHandle(ref, () => ({
     addPokemon,
+    loadTeam,
   }));
 
   return (
