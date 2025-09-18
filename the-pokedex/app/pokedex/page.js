@@ -13,7 +13,7 @@ export default function Pokedex() {
 
   const [editingTeamId, setEditingTeamId] = useState(null);
 
-  // função que é passada pro Times
+  
   const handleEditTeam = (team) => {
     if (teamBuilderRef.current) {
       teamBuilderRef.current.loadTeam(team.pokemons, team.teamName);

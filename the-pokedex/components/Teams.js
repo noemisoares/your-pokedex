@@ -39,12 +39,12 @@ const Times = ({ trainerName, onEditTeam }) => {
       `Tem certeza de que deseja deletar o time "${teamName}" ?`
     );
 
-    if (!confirmDelete) return; // se cancelar, não faz nada
+    if (!confirmDelete) return; 
 
     try {
       await deleteTeam(teamId);
       alert(`Time "${teamName}" deletado com sucesso!`);
-      fetchTeams(); // recarrega a lista após deletar
+      fetchTeams(); 
     } catch (error) {
       console.error("Erro ao deletar time:", error);
       alert("Erro ao deletar time.");
@@ -61,7 +61,7 @@ const Times = ({ trainerName, onEditTeam }) => {
           <button
             className={styles.editButton}
             onClick={(e) => {
-            e.stopPropagation(); // impede que clique no card dispare outros eventos
+            e.stopPropagation(); 
             onEditTeam && onEditTeam(team);
             }}
           >

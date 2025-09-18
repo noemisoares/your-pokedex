@@ -75,11 +75,11 @@ function loadTeam(pokemons, name) {
 
     try {
       if (props.editingTeamId) {
-        // Atualizar o time existente
+        
         await updateTeam(props.editingTeamId, pokemons);
         alert(`Time "${teamName}" atualizado com sucesso!`);
       } else {
-      // Criar novo time
+      
         await createTeam(teamName, pokemons);
         alert(`Time "${teamName}" criado com sucesso!`);
       }
