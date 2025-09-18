@@ -1,8 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { getTeamsByTrainer, getAllTeams } from "../api/team";
+import { getTeamsByTrainer, getAllTeams, deleteTeam } from "../api/team";
 import styles from "./teams.module.css";
+import { Trash } from "lucide-react";
 
 const Times = ({ trainerName, onEditTeam }) => {
   const [teams, setTeams] = useState([]);
@@ -32,11 +33,35 @@ const Times = ({ trainerName, onEditTeam }) => {
   if (loading) return <div>Carregando times...</div>;
   if (!teams.length) return <div>Nenhum time encontrado.</div>;
 
+   const handleDelete = async (teamId, teamName) => {
+    const confirmDelete = window.confirm(
+      `Tem certeza de que deseja deletar o time "${teamName}" ?`
+    );
+
+    if (!confirmDelete) return; // se cancelar, não faz nada
+
+    try {
+      await deleteTeam(teamId);
+      alert(`Time "${teamName}" deletado com sucesso!`);
+      fetchTeams(); // recarrega a lista após deletar
+    } catch (error) {
+      console.error("Erro ao deletar time:", error);
+      alert("Erro ao deletar time.");
+    }
+  };
+
+
   return (
     <div className={styles.timesContainer}>
       {teams.map((team) => (
         <div key={team.objectId} className={styles.teamCard} onClick={() => onEditTeam && onEditTeam(team)}>
           <h3 className={styles.teamName}>{team.teamName}</h3>
+          <button
+            className={styles.deleteButton}
+            onClick={(e) => handleDelete(team.objectId, team.teamName, e)}
+          >
+            <Trash size={20} color="red" />
+          </button>
           <div className={styles.pokemons}>
             {team.pokemons.map((p, i) => (
               <div key={i} className={styles.pokemon}>
