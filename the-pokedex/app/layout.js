@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <Header />
-        <main style={{ paddingTop: "80px" }}>{children}</main>
+        <main >{children}</main>
       </body>
     </html>
   );

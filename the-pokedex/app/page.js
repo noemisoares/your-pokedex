@@ -15,12 +15,12 @@ export default function Home() {
         e muito mais!
       </p>
 
-      <div className={styles.banner}>
+      <div className={styles.pikachuBg}>
         <Image
           src="/images/pikachu.png"
           alt="Pikachu"
-          width="200"
-          height="200"
+          width={1000}
+          height={1000}
         />
       </div>
 

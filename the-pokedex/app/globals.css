@@ -32,8 +32,8 @@ a {
 }
 
 .site-header {
-  background-color: #ef5350;
-  border-bottom: 4px solid #f8fbfd;
+  background-color: #0400ff;
+  border-bottom: 4px solid #fdfb5b;
   padding: 12px 24px;
 }
 
@@ -61,7 +61,7 @@ a {
 }
 
 .nav-list a:hover {
-  color: #ffffff;
+  color: #803838;
 }
 
 .right-side {

@@ -1,6 +1,6 @@
 .home {
-  background-color: rgba(182, 7, 7, 0);
-  color:var(--primary);
+  
+  
   position: relative;
   min-height: 100vh;
   display: flex;
@@ -12,18 +12,28 @@
 }
 
 .titulinho {
-  font-size:60px;
+  font-size:50px;
   margin-left: 15px;
 }
 .titulo {
-  font-size:150px;
-  margin-left: 90px;
+  font-size:130px;
+  margin-left: 70px;
 }
 
 .pokedexBg {
   position: absolute;
   top: 60%;
-  left: 70%;
+  left: 50%;
+  transform: translate(-40%, -50%);
+  opacity: 1.0;
+  z-index: 0;
+  pointer-events: none;
+}
+.pikachuBg {
+  position: absolute;
+  margin-top: 1100px;
+  margin-left: 1840px;
+  
   transform: translate(-40%, -50%);
   opacity: 1.0;
   z-index: 0;
