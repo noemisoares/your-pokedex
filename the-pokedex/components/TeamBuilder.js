@@ -83,10 +83,11 @@ function loadTeam(pokemons, name) {
         await createTeam(teamName, pokemons);
         alert(`Time "${teamName}" criado com sucesso!`);
       }
-    } catch (err) {
-      console.error("Erro ao salvar time:", err);
-      alert("Erro ao salvar o time. Tente novamente.");
-    }
+      window.location.reload();
+      } catch (err) {
+       console.error("Erro ao salvar time:", err);
+        alert("Erro ao salvar o time. Tente novamente.");
+      }
   }
   useImperativeHandle(ref, () => ({
     addPokemon,

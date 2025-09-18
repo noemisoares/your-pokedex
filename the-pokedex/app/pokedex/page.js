@@ -110,7 +110,7 @@ export default function Pokedex() {
   return (
     <main className={styles.container}>
       <div className={styles.teams}>
-        <TeamBuilder ref={teamBuilderRef} editingTeamId={editingTeamId}/>
+        <TeamBuilder ref={teamBuilderRef} editingTeamId={editingTeamId} />
         <Teams onEditTeam={handleEditTeam} />
       </div>
 
