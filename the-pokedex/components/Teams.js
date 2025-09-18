@@ -34,7 +34,7 @@ const Times = ({ trainerName, onEditTeam }) => {
   if (!teams.length) return <div>Nenhum time encontrado.</div>;
 
    const handleDelete = async (teamId, teamName) => {
-    e.stopPropagation();
+    
     const confirmDelete = window.confirm(
       `Tem certeza de que deseja deletar o time "${teamName}" ?`
     );
