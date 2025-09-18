@@ -1,6 +1,6 @@
 import { useState, forwardRef, useImperativeHandle } from "react";
 import Image from "next/image";
-import { createTeam } from "../api/team";
+import { createTeam, updateTeam } from "../api/team";
 import styles from "./teamBuilder.module.css";
 
 const PokeballIcon = ({ size = 40 }) => (
@@ -70,13 +70,24 @@ function loadTeam(pokemons, name) {
       alert("Digite o nome do time!");
       return;
     }
-    await createTeam(
-      teamName,
-      team.filter((p) => p !== null)
-    );
-    alert(`Time de ${teamName} salvo com sucesso!`);
-  }
 
+    const pokemons = team.filter((p) => p !== null);
+
+    try {
+      if (props.editingTeamId) {
+        // Atualizar o time existente
+        await updateTeam(props.editingTeamId, pokemons);
+        alert(`Time "${teamName}" atualizado com sucesso!`);
+      } else {
+      // Criar novo time
+        await createTeam(teamName, pokemons);
+        alert(`Time "${teamName}" criado com sucesso!`);
+      }
+    } catch (err) {
+      console.error("Erro ao salvar time:", err);
+      alert("Erro ao salvar o time. Tente novamente.");
+    }
+  }
   useImperativeHandle(ref, () => ({
     addPokemon,
     loadTeam,
