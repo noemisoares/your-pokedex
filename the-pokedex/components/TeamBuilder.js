@@ -37,7 +37,7 @@ const PokeballIcon = ({ size = 40 }) => (
 const TeamBuilder = forwardRef((props, ref) => {
   const [team, setTeam] = useState([null, null, null, null, null, null]);
   const [teamName, setTeamName] = useState("");
-
+  const [saving, setSaving] = useState(false);
 function loadTeam(pokemons, name) {
   const fullTeam = [...pokemons];
   while (fullTeam.length < 6) {
@@ -76,7 +76,7 @@ function loadTeam(pokemons, name) {
     try {
       if (props.editingTeamId) {
         
-        await updateTeam(props.editingTeamId, pokemons);
+        await updateTeam(props.editingTeamId, pokemons, teamName);
         alert(`Time "${teamName}" atualizado com sucesso!`);
       } else {
       
@@ -123,7 +123,8 @@ function loadTeam(pokemons, name) {
         ))}
       </div>
       <button onClick={saveTeam} className={styles.buttonSave}>
-        Salvar Time
+        
+        {saving ? "Salvando..." : "Salvar Time"}
       </button>
     </div>
   );

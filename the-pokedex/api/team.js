@@ -11,8 +11,8 @@ export async function getTeamsByTrainer(teamName) {
 }
 
 //aqui pra will >>>
-export async function updateTeam(teamId, pokemons) {
-  return instance.put(`/classes/Team/${teamId}`, { pokemons });
+export async function updateTeam(teamId, pokemons, teamName) {
+  return instance.put(`/classes/Team/${teamId}`, { pokemons, teamName});
 }
 
 export async function deleteTeam(teamId) {
