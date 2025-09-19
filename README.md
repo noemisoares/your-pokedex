@@ -36,4 +36,11 @@
     <td align="center">Pedro Mota</td>
     <td align="center"><a href="https://github.com/pep287">@pep287</a></td>
   </tr>
+  <tr>
+    <td align="center">
+      <img src="https://github.com/Shirookkj.png" width="100px" style="border-radius:50%;" alt="Artur Uchôa"/>
+    </td>
+<td align="center">Artur Uchôa</td>
+    <td align="center"><a href="https://github.com/Shirookkj">@Shirookkj</a></td>
+  </tr>
 </table>
