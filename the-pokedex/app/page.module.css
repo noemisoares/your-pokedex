@@ -24,13 +24,13 @@
 }
 
 .pokedexLinkRight {
-  margin-left: 720px;
-  margin-top: 100px;
+  left: 807px;
+  margin-bottom: 50px;
   z-index: 2;
   position: relative;
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   color: #fff;
-  background: rgb(95, 94, 94);
+  background: rgba(48, 48, 48, 0.299);
   padding: 0.7rem 2rem;
   border-radius: 0.5rem;
   text-decoration: none;
@@ -45,24 +45,19 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-
+  background-color: #1a3bb0d5;
   justify-content: center;
   overflow: hidden;
 }
 
 .titulinho {
   font-size: 50px;
-  margin-left: 15px;
-}
-.titulo {
-  font-size: 130px;
-  margin-left: 70px;
 }
 
 .pokedexBg {
   position: absolute;
-  top: 60%;
-  left: 50%;
+  top: 55%;
+  left: 55%;
   transform: translate(-40%, -50%);
   opacity: 1;
   z-index: 0;
@@ -70,7 +65,7 @@
 }
 .pikachuBg {
   position: absolute;
-  margin-top: 1100px;
+  margin-top: 900px;
   margin-left: 1840px;
 
   transform: translate(-40%, -50%);

@@ -5,14 +5,13 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className={styles.home}>
-
       <div className={styles.tituloContainer}>
         <h1 className={styles.titulinho}>Bem-vindo à</h1>
-        <h1 className={styles.titulo}>POKÉDEX</h1>
-        <p>
-          Explore informações sobre todos os Pokémon, descubra tipos, habilidades
-          e muito mais!
-        </p>
+        <Image src="/logo.png" alt="PokedexTxt" width={700} height={150} />
+        <h4>
+          Explore informações sobre todos os Pokémon, descubra tipos,
+          habilidades e muito mais!
+        </h4>
       </div>
 
       <div className={styles.pikachuBg}>
@@ -20,7 +19,7 @@ export default function Home() {
           src="/images/pikachu.png"
           alt="Pikachu"
           width={1000}
-          height={1000}
+          height={950}
         />
       </div>
 
@@ -28,15 +27,16 @@ export default function Home() {
         <Image
           src="/images/pokedex-color.svg"
           alt="Pokedex"
-          width={1100}
-          height={1100}
+          width={1000}
+          height={1000}
         />
       </div>
 
-      
-  <div className={styles.pokedexLinkWrapper}>
-    <Link href="/pokedex" className={styles.pokedexLinkRight}>Ir para Pokédex</Link>
-  </div>
+      <div className={styles.pokedexLinkWrapper}>
+        <Link href="/pokedex" className={styles.pokedexLinkRight}>
+          Ir para Pokédex
+        </Link>
+      </div>
 
       {/* <section className={styles.sobre}>
         <h2>Sobre nós</h2>
