@@ -13,17 +13,23 @@ body {
 }
 
 :root {
-  --primary: #020202;
-  --secondary: #f6f6f6;
-  --bg: #a80404;
-  --text: #000000;
+  --primary: #0a2b4a;
+  --secondary: #fcfcfc;
+  --bg: #dddddd;
+  --text: #161616;
+  --button: #145bcd;
+  --card: #f9f9f9;
+  --title: #333333;
 }
 
 .dark {
-  --primary: #e8ecf8;
+  --primary: #161616;
   --secondary: #1d1d1d;
-  --bg: #3c0202;
-  --text: #ffffff;
+  --bg: #3b0606;
+  --text: #e0e0e0;
+  --button: #9d0505;
+  --card: #161616;
+  --title: #dad9d9;
 }
 
 a {
@@ -32,9 +38,9 @@ a {
 }
 
 .site-header {
-  background-color: #0400ff;
-  border-bottom: 4px solid #fdfb5b;
-  padding: 12px 24px;
+  background-color: var(--primary);
+  border-bottom: 1px solid var(--text);
+  padding: 8px 16px;
 }
 
 .nav {
@@ -45,6 +51,10 @@ a {
 
 .logo img {
   cursor: pointer;
+  display: block;
+  height: auto;
+  max-height: 50px;
+  width: auto;
 }
 
 .nav-list {
@@ -54,14 +64,14 @@ a {
 }
 
 .nav-list a {
-  color: white;
+  color: #e0e0e0;
   font-weight: bold;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .nav-list a:hover {
-  color: #803838;
+  color: #730606;
 }
 
 .right-side {

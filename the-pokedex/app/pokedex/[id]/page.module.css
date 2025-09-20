@@ -8,7 +8,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #3b82f6;
+  background: var(--button);
   color: white;
   padding: 12px 20px;
   border-radius: 10px;
@@ -19,11 +19,11 @@
 }
 
 .backButton:hover {
-  background: #2563eb;
+  background: #4db152;
 }
 
 .pokemonCard {
-  background: white;
+  background: var(--card);
   border-radius: 15px;
   padding: 30px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -33,7 +33,7 @@
 .title {
   font-size: 2.5rem;
   margin-bottom: 20px;
-  color: #333;
+  color: var(--title);
   text-transform: capitalize;
 }
 
@@ -51,7 +51,7 @@
 .stats h3 {
   font-size: 1.5rem;
   margin-bottom: 15px;
-  color: #333;
+  color: var(--title);
 }
 
 .statItem {
@@ -59,9 +59,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 8px 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #bbbbbb;
   text-transform: capitalize;
-  color: #000;
+  color: var(--text);
 }
 
 .statItem:last-child {
@@ -75,7 +75,7 @@
 .moves h3 {
   font-size: 1.5rem;
   margin-bottom: 15px;
-  color: #333;
+  color: var(--title);
 }
 
 .movesList {
@@ -86,12 +86,12 @@
 }
 
 .moveItem {
-  background: #f0f8ff;
+  background: #cfdcea;
   padding: 8px 12px;
   border-radius: 20px;
   font-size: 0.9rem;
   text-transform: capitalize;
-  border: 1px solid #ddd;
+  border: 1px solid #cecece;
   color: #000;
 }
 
@@ -102,7 +102,7 @@
 .evolutions h3 {
   font-size: 1.5rem;
   margin-bottom: 15px;
-  color: #333;
+  color: var(--title);
 }
 
 .evolutionsList {
@@ -120,7 +120,7 @@
 }
 
 .evolutionLink {
-  background: #4caf50;
+  background: var(--button);
   color: white;
   padding: 15px 20px;
   border-radius: 15px;
@@ -136,7 +136,7 @@
 }
 
 .evolutionLink:hover {
-  background: #45a049;
+  background: #4db152;
 }
 
 .evolutionSprite {
@@ -151,7 +151,7 @@
 
 .evolutionArrow {
   font-size: 1.5rem;
-  color: #666;
+  color: var(--title);
   font-weight: bold;
 }
 

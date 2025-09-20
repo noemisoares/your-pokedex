@@ -29,7 +29,13 @@ export function Header() {
       <nav className="nav">
         <div className="logo">
           <Link href="/">
-            <Image src="/logo.png" alt="Logo" width={50} height={50} />
+            <Image
+              src="/logo.png"
+              alt="Logo"
+              width={880}
+              height={0}
+              style={{ height: "auto" }}
+            />
           </Link>
         </div>
 

@@ -11,24 +11,24 @@
 }
 
 .teamCard {
-  border: 0.5px solid var(--primary);
+  border: 0.1px solid var(--secondary);
   padding: 8px;
   border-radius: 8px;
   background-color: var(--secondary);
-  color: var(--primary);
+  color: var(--text);
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
+
 .teamCard:hover{
   transform: translateY(-10px); 
-  
-  box-shadow: 30px 30px 30px hsla(0, 0%, 0%, 0.832); 
+  box-shadow: 5px 5px 5px hsla(0, 0%, 4%, 0.832); 
 }
 
 
 .teamName {
   font-weight: bold;
   margin-bottom: 4px;
-  color: var(--primary);
+  color: var(--title);
 }
 
 .pokemons {

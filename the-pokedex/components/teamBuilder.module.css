@@ -11,7 +11,7 @@
 .inputTrainer {
   padding: 0.5rem 1rem;
   font-size: 1rem;
-  border: 2px solid #ccc;
+  border: 1px solid var(--button);
   border-radius: 8px;
   margin-bottom: 1rem;
   width: 100%;
@@ -28,7 +28,7 @@
 .slot {
   width: 80px;
   height: 80px;
-  border: 2px dashed #cc4b4b;
+  border: 1px dashed var(--button);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -44,15 +44,15 @@
 .buttonSave {
   padding: 0.5rem 1rem;
   font-size: 1rem;
-  background-color: #e66f2f;
+  background-color: var(--button);
   border: none;
   border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
   transition: background-color 0.2s;
-  color: var(--primary);
+  color: var(--text);
 }
 
 .buttonSave:hover {
-  background-color: #164162;
+  background-color: #4db152;
 }
