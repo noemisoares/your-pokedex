@@ -5,15 +5,15 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className={styles.home}>
-      <h1 className={styles.titulinho}>Bem-vindo à</h1>
-        
-        <h1 className={styles.titulo}>POKÉDEX</h1>
-      
 
-      <p>
-        Explore informações sobre todos os Pokémon, descubra tipos, habilidades
-        e muito mais!
-      </p>
+      <div className={styles.tituloContainer}>
+        <h1 className={styles.titulinho}>Bem-vindo à</h1>
+        <h1 className={styles.titulo}>POKÉDEX</h1>
+        <p>
+          Explore informações sobre todos os Pokémon, descubra tipos, habilidades
+          e muito mais!
+        </p>
+      </div>
 
       <div className={styles.pikachuBg}>
         <Image
@@ -33,16 +33,19 @@ export default function Home() {
         />
       </div>
 
-      <Link href="/pokedex">Ir para Pokédex</Link>
+      
+  <div className={styles.pokedexLinkWrapper}>
+    <Link href="/pokedex" className={styles.pokedexLinkRight}>Ir para Pokédex</Link>
+  </div>
 
-      <section className={styles.sobre}>
+      {/* <section className={styles.sobre}>
         <h2>Sobre nós</h2>
         <p>
           Este projeto foi desenvolvido pelo nosso grupo com o objetivo de
           aprender e praticar desenvolvimento web. A Pokédex traz informações
           sobre os Pokémon de forma simples e divertida!
         </p>
-      </section>
+      </section> */}
     </main>
   );
 }
