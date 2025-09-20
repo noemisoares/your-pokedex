@@ -1,4 +1,27 @@
-# projeto-site
+![Preview do Projeto](https://your-pokedex-psi.vercel.app/logo.png)
+
+## 📝 Descrição
+**Your Pokedex** é uma aplicação web que permite explorar informações sobre os Pokémon de forma prática e interativa. 
+Na plataforma, é possível visualizar dados como nome, tipo, habilidades e imagens dos Pokémon, além de navegar de maneira simples. 
+Crie seu time de Pokemon usando todos os 151 da 1ª geração.
+
+👉 Acesse aqui: [Your Pokedex Online](https://your-pokedex-psi.vercel.app)
+
+## ✨ Funcionalidades
+- Página inicial de boas-vindas
+- Listagem de Pokemon com carregamento dinâmico
+- Montagem de Time de Pokemon
+- Visualização de detalhes: nome, tipo, evoluções, movimentos, imagem...
+- Busca e filtro por Pokemon
+- Interface responsiva
+- Hospedagem online no **Vercel**
+
+## 🛠️ Tecnologias Utilizadas
+- **Framework:** Next.js / React
+- **Linguagem:** JavaScript
+- **Estilização:** CSS Modules  
+- **API:** [PokéAPI](https://pokeapi.co/)  
+- **Deploy:** [Vercel](https://vercel.com/)  
 
 ## 💻 Equipe
 
