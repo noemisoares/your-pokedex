@@ -1,4 +1,4 @@
-import { useState, forwardRef, useImperativeHandle } from "react";
+import { useState, forwardRef, useImperativeHandle, useEffect } from "react";
 import Image from "next/image";
 import { createTeam, updateTeam } from "../api/team";
 import styles from "./teamBuilder.module.css";
@@ -38,17 +38,21 @@ const TeamBuilder = forwardRef((props, ref) => {
   const [team, setTeam] = useState([null, null, null, null, null, null]);
   const [teamName, setTeamName] = useState("");
   const [saving, setSaving] = useState(false);
-function loadTeam(pokemons, name) {
-  const fullTeam = [...pokemons];
-  while (fullTeam.length < 6) {
-    fullTeam.push(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  function loadTeam(pokemons, name) {
+    const fullTeam = [...pokemons];
+    while (fullTeam.length < 6) {
+      fullTeam.push(null);
+    }
+
+    setTeam(fullTeam);
+    setTeamName(name);
   }
-
-  setTeam(fullTeam);
-  setTeamName(name);
-}
-
-  
 
   function addPokemon(pokemon) {
     const index = team.findIndex((p) => p === null);
@@ -72,27 +76,39 @@ function loadTeam(pokemons, name) {
     }
 
     const pokemons = team.filter((p) => p !== null);
+    setSaving(true);
 
     try {
       if (props.editingTeamId) {
-        
         await updateTeam(props.editingTeamId, pokemons, teamName);
         alert(`Time "${teamName}" atualizado com sucesso!`);
       } else {
-      
         await createTeam(teamName, pokemons);
         alert(`Time "${teamName}" criado com sucesso!`);
       }
-      window.location.reload();
-      } catch (err) {
-       console.error("Erro ao salvar time:", err);
-        alert("Erro ao salvar o time. Tente novamente.");
-      }
+
+      setTeam([null, null, null, null, null, null]);
+      setTeamName("");
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
+    } catch (err) {
+      console.error("Erro ao salvar time:", err);
+      alert("Erro ao salvar o time. Tente novamente.");
+    } finally {
+      setSaving(false);
+    }
   }
+
   useImperativeHandle(ref, () => ({
     addPokemon,
     loadTeam,
   }));
+
+  if (!mounted) {
+    return <div>Carregando...</div>;
+  }
 
   return (
     <div className={styles.container}>
@@ -122,8 +138,11 @@ function loadTeam(pokemons, name) {
           </div>
         ))}
       </div>
-      <button onClick={saveTeam} className={styles.buttonSave}>
-        
+      <button
+        onClick={saveTeam}
+        className={styles.buttonSave}
+        disabled={saving}
+      >
         {saving ? "Salvando..." : "Salvar Time"}
       </button>
     </div>

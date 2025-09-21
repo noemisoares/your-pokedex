@@ -12,9 +12,13 @@ export default function Pokedex() {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedType, setSelectedType] = useState("");
+  const [editingTeamId, setEditingTeamId] = useState(null);
+  const [mounted, setMounted] = useState(false);
   const teamBuilderRef = useRef();
 
-  const [editingTeamId, setEditingTeamId] = useState(null);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleEditTeam = (team) => {
     if (teamBuilderRef.current) {
@@ -24,47 +28,49 @@ export default function Pokedex() {
   };
 
   useEffect(() => {
-    const fetchPokemonData = async () => {
-      try {
-        const response = await axios.get(
-          "https://pokeapi.co/api/v2/pokemon?limit=151"
-        );
-        const pokemonList = response.data.results;
+    if (mounted) {
+      const fetchPokemonData = async () => {
+        try {
+          const response = await axios.get(
+            "https://pokeapi.co/api/v2/pokemon?limit=151"
+          );
+          const pokemonList = response.data.results;
 
-        const pokemonWithDetails = await Promise.all(
-          pokemonList.map(async (pokemon, index) => {
-            const id = index + 1;
-            try {
-              const detailResponse = await axios.get(
-                `https://pokeapi.co/api/v2/pokemon/${id}`
-              );
-              return {
-                ...pokemon,
-                id: id,
-                types: detailResponse.data.types,
-              };
-            } catch (error) {
-              console.error(`Erro ao buscar dados do Pokémon ${id}:`, error);
-              return {
-                ...pokemon,
-                id: id,
-                types: [],
-              };
-            }
-          })
-        );
+          const pokemonWithDetails = await Promise.all(
+            pokemonList.map(async (pokemon, index) => {
+              const id = index + 1;
+              try {
+                const detailResponse = await axios.get(
+                  `https://pokeapi.co/api/v2/pokemon/${id}`
+                );
+                return {
+                  ...pokemon,
+                  id: id,
+                  types: detailResponse.data.types,
+                };
+              } catch (error) {
+                console.error(`Erro ao buscar dados do Pokémon ${id}:`, error);
+                return {
+                  ...pokemon,
+                  id: id,
+                  types: [],
+                };
+              }
+            })
+          );
 
-        setPokemons(pokemonWithDetails);
-        setFilteredPokemons(pokemonWithDetails);
-        setLoading(false);
-      } catch (err) {
-        console.error(err);
-        setLoading(false);
-      }
-    };
+          setPokemons(pokemonWithDetails);
+          setFilteredPokemons(pokemonWithDetails);
+          setLoading(false);
+        } catch (err) {
+          console.error(err);
+          setLoading(false);
+        }
+      };
 
-    fetchPokemonData();
-  }, []);
+      fetchPokemonData();
+    }
+  }, [mounted]);
 
   useEffect(() => {
     let filtered = pokemons;
@@ -145,7 +151,7 @@ export default function Pokedex() {
     "fairy",
   ];
 
-  if (loading) {
+  if (!mounted || loading) {
     return <div className={styles.loading}>Carregando Pokémon...</div>;
   }
 

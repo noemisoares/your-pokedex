@@ -8,8 +8,15 @@ import { Trash, Pencil } from "lucide-react";
 const Times = ({ trainerName, onEditTeam }) => {
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const fetchTeams = async () => {
+    if (!mounted) return;
+
     setLoading(true);
     try {
       let response;
@@ -21,36 +28,45 @@ const Times = ({ trainerName, onEditTeam }) => {
       setTeams(response.data.results || []);
     } catch (error) {
       console.error("Erro ao buscar times:", error);
+      setTeams([]);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchTeams();
-  }, [trainerName]);
+    if (mounted) {
+      const timer = setTimeout(() => {
+        fetchTeams();
+      }, 100);
+
+      return () => clearTimeout(timer);
+    }
+  }, [trainerName, mounted]);
+
+  if (!mounted) {
+    return <div>Carregando...</div>;
+  }
 
   if (loading) return <div>Carregando times...</div>;
   if (!teams.length) return <div>Nenhum time encontrado.</div>;
 
-   const handleDelete = async (teamId, teamName) => {
-    
+  const handleDelete = async (teamId, teamName) => {
     const confirmDelete = window.confirm(
       `Tem certeza de que deseja deletar o time "${teamName}" ?`
     );
 
-    if (!confirmDelete) return; 
+    if (!confirmDelete) return;
 
     try {
       await deleteTeam(teamId);
       alert(`Time "${teamName}" deletado com sucesso!`);
-      fetchTeams(); 
+      fetchTeams();
     } catch (error) {
       console.error("Erro ao deletar time:", error);
       alert("Erro ao deletar time.");
     }
   };
-
 
   return (
     <div className={styles.timesContainer}>
@@ -61,15 +77,18 @@ const Times = ({ trainerName, onEditTeam }) => {
           <button
             className={styles.editButton}
             onClick={(e) => {
-            e.stopPropagation(); 
-            onEditTeam && onEditTeam(team);
+              e.stopPropagation();
+              onEditTeam && onEditTeam(team);
             }}
           >
             <Pencil size={20} color="blue" />
           </button>
           <button
             className={styles.deleteButton}
-            onClick={(e) => handleDelete(team.objectId, team.teamName, e)}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleDelete(team.objectId, team.teamName);
+            }}
           >
             <Trash size={20} color="red" />
           </button>
@@ -79,7 +98,6 @@ const Times = ({ trainerName, onEditTeam }) => {
                 <Image src={p.image} alt={p.name} width={40} height={40} />
                 <span>{p.name}</span>
               </div>
-
             ))}
           </div>
         </div>
