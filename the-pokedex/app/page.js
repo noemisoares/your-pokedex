@@ -7,7 +7,7 @@ export default function Home() {
     <main className={styles.home}>
       <div className={styles.tituloContainer}>
         <h1 className={styles.titulinho}>Bem-vindo à</h1>
-        <Image src="/logo.png" alt="PokedexTxt" width={400} height={150} />
+        <Image src="/logo.png" alt="PokedexTxt" width={600} height={225} />
         <h4>
           Explore informações sobre todos os Pokémon, descubra tipos,
           habilidades e muito mais!
@@ -18,8 +18,24 @@ export default function Home() {
         <Image
           src="/images/pikachu.png"
           alt="Pikachu"
-          width={1000}
-          height={950}
+          width={390}
+          height={360}
+        />
+      </div>
+      <div className={styles.charmanderBg}>
+        <Image
+          src="/images/charmander.png"
+          alt="Charmander"
+          width={500}
+          height={460}
+        />
+      </div>
+      <div className={styles.squirtleBg}>
+        <Image
+          src="/images/squirtle.png"
+          alt="Squirtle"
+          width={425}
+          height={460}
         />
       </div>
 

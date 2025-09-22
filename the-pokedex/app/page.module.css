@@ -1,6 +1,8 @@
 .tituloContainer {
-  background: #929292;
-  border: 4px solid #bbb;
+  position: absolute;
+  top: 25px;
+  background: var(--card);
+  border: 10px solid #ffffff;
   border-radius: 24px;
   box-shadow: 0 2px 16px rgba(180, 180, 180, 0.1);
   display: flex;
@@ -45,7 +47,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #1a3bb0d5;
+  background-color: var(--bg);
   justify-content: center;
   overflow: hidden;
 }
@@ -65,8 +67,26 @@
 }
 .pikachuBg {
   position: absolute;
-  top: 55%;
-  left: 71.5%;
+  top: 90%;
+  left: 13%;
+  transform: translate(-40%, -50%);
+  opacity: 1;
+  z-index: 0;
+  pointer-events: none;
+}
+.charmanderBg {
+  position: absolute;
+  top: 98%;
+  left: 38%;
+  transform: translate(-40%, -50%);
+  opacity: 1;
+  z-index: 0;
+  pointer-events: none;
+}
+.squirtleBg {
+  position: absolute;
+  top: 98%;
+  left: 50%;
   transform: translate(-40%, -50%);
   opacity: 1;
   z-index: 0;
