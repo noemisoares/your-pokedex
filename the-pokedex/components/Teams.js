@@ -35,13 +35,7 @@ const Times = ({ trainerName, onEditTeam }) => {
   };
 
   useEffect(() => {
-    if (mounted) {
-      const timer = setTimeout(() => {
-        fetchTeams();
-      }, 100);
-
-      return () => clearTimeout(timer);
-    }
+    fetchTeams();
   }, [trainerName, mounted]);
 
   if (!mounted) {
