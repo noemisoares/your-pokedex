@@ -57,7 +57,7 @@
 .pokedexBg {
   position: absolute;
   top: 55%;
-  left: 55%;
+  left: 71.5%;
   transform: translate(-40%, -50%);
   opacity: 1;
   z-index: 0;
@@ -65,9 +65,8 @@
 }
 .pikachuBg {
   position: absolute;
-  margin-top: 900px;
-  margin-left: 1840px;
-
+  top: 55%;
+  left: 71.5%;
   transform: translate(-40%, -50%);
   opacity: 1;
   z-index: 0;

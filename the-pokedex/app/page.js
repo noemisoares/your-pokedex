@@ -7,7 +7,7 @@ export default function Home() {
     <main className={styles.home}>
       <div className={styles.tituloContainer}>
         <h1 className={styles.titulinho}>Bem-vindo à</h1>
-        <Image src="/logo.png" alt="PokedexTxt" width={700} height={150} />
+        <Image src="/logo.png" alt="PokedexTxt" width={400} height={150} />
         <h4>
           Explore informações sobre todos os Pokémon, descubra tipos,
           habilidades e muito mais!
