@@ -8,10 +8,14 @@ import { Trash, Pencil } from "lucide-react";
 const Times = ({ trainerName, onEditTeam }) => {
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const fetchTeams = async () => {
-    
+    if (!mounted) return;
 
     setLoading(true);
     try {
@@ -32,8 +36,11 @@ const Times = ({ trainerName, onEditTeam }) => {
 
   useEffect(() => {
     fetchTeams();
-  }, [trainerName]);
+  }, [trainerName, mounted]);
 
+  if (!mounted) {
+    return <div>Carregando...</div>;
+  }
 
   if (loading) return <div>Carregando times...</div>;
   if (!teams.length) return <div>Nenhum time encontrado.</div>;
