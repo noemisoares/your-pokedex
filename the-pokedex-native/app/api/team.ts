@@ -1,5 +1,5 @@
-import instance from "./index";
-import { Pokemon } from "./index";
+import instance from "./backend";
+import { Pokemon } from "./backend";
 
 export async function createTeam(teamName: string, pokemons: Pokemon[]) {
   return instance.post("/classes/Team", { teamName, pokemons });

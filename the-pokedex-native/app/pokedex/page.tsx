@@ -12,9 +12,11 @@ import {
 import axios from "axios";
 import { Link } from "expo-router";
 import TeamBuilder from "@/components/TeamBuilder";
-import Teams from "@/components/Teams";
+import { useUserStore } from "../store/useUserStore";
 
 export default function Pokedex() {
+  const user = useUserStore((state) => state.user);
+
   const [pokemons, setPokemons] = useState<any[]>([]);
   const [filteredPokemons, setFilteredPokemons] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -163,11 +165,13 @@ export default function Pokedex() {
       contentContainerStyle={{ padding: 16, paddingBottom: 40 }}
       ListHeaderComponent={
         <>
-          <TeamBuilder
-            ref={teamBuilderRef}
-            editingTeamId={editingTeamId ?? undefined}
-          />
-          <Teams onEditTeam={handleEditTeam} />
+          {user && !user.anonymous && (
+            <TeamBuilder
+              ref={teamBuilderRef}
+              editingTeamId={editingTeamId ?? undefined}
+            />
+          )}
+
           <Text style={styles.title}>Pokédex</Text>
           <TextInput
             placeholder="Buscar Pokémon..."
@@ -236,12 +240,14 @@ export default function Pokedex() {
               </TouchableOpacity>
             </Link>
 
-            <TouchableOpacity
-              onPress={() => handleAddToTeam(poke)}
-              style={styles.saveButton}
-            >
-              <Text style={styles.saveButtonText}>Adicionar ao Time</Text>
-            </TouchableOpacity>
+            {user && !user.anonymous && (
+              <TouchableOpacity
+                onPress={() => handleAddToTeam(poke)}
+                style={styles.saveButton}
+              >
+                <Text style={styles.saveButtonText}>Adicionar ao Time</Text>
+              </TouchableOpacity>
+            )}
           </View>
         );
       }}
@@ -283,7 +289,6 @@ const styles = StyleSheet.create({
   },
   typeButtonActive: { backgroundColor: "#ffcb05" },
   typeButtonText: { color: "#fff", fontWeight: "bold", fontSize: 14 },
-  grid: { paddingBottom: 40, justifyContent: "center" },
   card: {
     backgroundColor: "#1e1e1e",
     borderRadius: 12,

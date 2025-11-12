@@ -6,7 +6,6 @@ import { Header } from "../components/Header";
 export default function RootLayout() {
   return (
     <SafeAreaView style={styles.container}>
-      <Header />
       <Stack
         screenOptions={{
           headerShown: false,
