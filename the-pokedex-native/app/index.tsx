@@ -10,14 +10,13 @@ import {
   Alert,
   Modal,
 } from "react-native";
-import { Link, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { createUser, loginUser } from "./api/backend";
 import { useUserStore } from "./store/useUserStore";
 
 export default function Home() {
   const router = useRouter();
   const setUser = useUserStore((state) => state.setUser);
-
   const [modalVisible, setModalVisible] = useState<"login" | "signup" | null>(
     null
   );
@@ -26,13 +25,9 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleAnonymous = () => {
-    router.push("/pokedex/page");
-  };
-
   const handleSignup = async () => {
     try {
-      const user = await createUser(username, trainerName, email, password);
+      await createUser(username, trainerName, email, password);
       Alert.alert(
         "Conta criada!",
         "Agora você pode logar com seu username e senha."
@@ -91,20 +86,14 @@ export default function Home() {
       />
 
       <View style={styles.buttonsWrapper}>
-        <TouchableOpacity style={styles.button} onPress={handleAnonymous}>
-          <Text style={styles.buttonText}>Entrada Anônima</Text>
-        </TouchableOpacity>
         <TouchableOpacity
-          style={styles.button}
-          onPress={() => setModalVisible("login")}
+          style={[styles.button, { paddingVertical: 18 } ]}
+          onPress={() => {
+            // acessar Pokedex — marca como anônimo se não houver usuário
+            router.push("/pokedex/page");
+          }}
         >
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => setModalVisible("signup")}
-        >
-          <Text style={styles.buttonText}>Criar Conta</Text>
+          <Text style={[styles.buttonText, { fontSize: 20 }]}>POKEDEX</Text>
         </TouchableOpacity>
       </View>
 

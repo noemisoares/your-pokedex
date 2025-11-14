@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   View,
-  Text,
   TouchableOpacity,
   Image,
   StyleSheet,
@@ -9,23 +8,38 @@ import {
 } from "react-native";
 import { Link } from "expo-router";
 import { useTheme } from "../constants/theme";
+import Sidebar from "./Sidebar";
 
 export const Header: React.FC = () => {
   const systemScheme = useColorScheme();
   const [darkMode, setDarkMode] = useState(systemScheme === "dark");
   const theme = useTheme();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const styles = getStyles(theme);
 
+  const HamburgerIcon = () => (
+    <View style={styles.hamburgerContent}>
+      <View style={styles.hamburgerLine} />
+      <View style={styles.hamburgerLine} />
+      <View style={styles.hamburgerLine} />
+    </View>
+  );
+
   const toggleTheme = () => {
     setDarkMode((prev) => !prev);
-    // Futuramente pode atualizar um Context para tema global
   };
 
   return (
     <View style={styles.header}>
+      <Sidebar visible={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+
       <View style={styles.nav}>
-        {/* Logo */}
+        {/* Hamburger / open sidebar */}
+        <TouchableOpacity onPress={() => setSidebarOpen(true)} style={styles.hamburger}>
+          <HamburgerIcon />
+        </TouchableOpacity>
+
         <Link href="/">
           <Image
             source={require("../assets/logo.png")}
@@ -33,25 +47,6 @@ export const Header: React.FC = () => {
             resizeMode="contain"
           />
         </Link>
-
-        {/* Links */}
-        <View style={styles.navList}>
-          <Link href="/">
-            <Text style={styles.navText}>Home</Text>
-          </Link>
-
-          <TouchableOpacity>
-            <Text style={styles.navText}>Sobre Nós</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity>
-            <Text style={styles.navText}>Como Funciona</Text>
-          </TouchableOpacity>
-
-          <Link href="/pokedex/page">
-            <Text style={styles.navText}>Pokedex</Text>
-          </Link>
-        </View>
 
         {/* Botão de tema */}
         <TouchableOpacity
@@ -91,15 +86,19 @@ const getStyles = (theme: any) =>
       width: 100,
       height: 50,
     },
-    navList: {
-      flexDirection: "row",
-      alignItems: "center",
+    hamburger: {
+      padding: 8,
+      marginRight: 8,
     },
-    navText: {
-      color: "#e0e0e0",
-      fontWeight: "bold",
-      fontSize: 16,
-      marginRight: 24, // substitui o gap
+    hamburgerContent: {
+      width: 24,
+      height: 24,
+      justifyContent: 'space-around',
+    },
+    hamburgerLine: {
+      width: 24,
+      height: 2,
+      backgroundColor: '#e0e0e0',
     },
     themeButton: {
       backgroundColor: "transparent",

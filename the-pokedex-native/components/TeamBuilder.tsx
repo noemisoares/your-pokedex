@@ -142,7 +142,7 @@ const TeamBuilder = forwardRef<TeamBuilderRef, TeamBuilderProps>(
     if (!mounted) {
       return (
         <View style={styles.centered}>
-          <ActivityIndicator size="large" color="#4db152" />
+          <ActivityIndicator size="large" color="#13b01bff" />
           <Text>Carregando...</Text>
         </View>
       );

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   View,
   Text,
@@ -32,7 +32,7 @@ const Times: React.FC<TimesProps> = ({ trainerName, onEditTeam }) => {
   const [teams, setTeams] = useState<Team[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchTeams = async () => {
+  const fetchTeams = useCallback(async () => {
     setLoading(true);
     try {
       let response;
@@ -48,11 +48,11 @@ const Times: React.FC<TimesProps> = ({ trainerName, onEditTeam }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [trainerName]);
 
   useEffect(() => {
     fetchTeams();
-  }, [trainerName]);
+  }, [fetchTeams]);
 
   const handleDelete = async (teamId: string, teamName: string) => {
     Alert.alert("Confirmação", `Deseja deletar o time "${teamName}"?`, [
