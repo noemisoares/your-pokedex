@@ -1,14 +1,25 @@
 import instance, { Pokemon } from "./backend";
 
-export async function createTeam(teamName: string, pokemons: Pokemon[]) {
-  return instance.post("/classes/Team", { teamName, pokemons });
+export async function createTeam(
+  teamName: string,
+  pokemons: Pokemon[],
+  trainerName: string
+) {
+  return instance.post("/classes/Team", {
+    teamName,
+    pokemons,
+    trainerName,
+  });
 }
 
-export async function getTeamsByTrainer(teamName: string) {
-  return instance.get(
-    `/classes/Team?where=${encodeURIComponent(JSON.stringify({ teamName }))}`
-  );
-}
+export const getTeamsByTrainer = async (trainerName: string) => {
+  const response = await instance.get("/classes/Team", {
+    params: {
+      where: JSON.stringify({ trainerName }),
+    },
+  });
+  return response;
+};
 
 export async function updateTeam(
   teamId: string,
@@ -26,5 +37,4 @@ export async function getAllTeams() {
   return instance.get("/classes/Team");
 }
 
-// ✅ Default export para evitar o warning do Expo Router
 export default {};

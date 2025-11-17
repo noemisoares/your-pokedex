@@ -16,6 +16,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { createTeam, updateTeam } from "../app/api/team";
+import { useUserStore } from "../app/store/useUserStore";
 
 const PokeballIcon = ({ size = 60 }: { size?: number }) => (
   <View
@@ -60,6 +61,8 @@ export type TeamBuilderRef = {
 
 const TeamBuilder = forwardRef<TeamBuilderRef, TeamBuilderProps>(
   ({ editingTeamId }, ref) => {
+    const user = useUserStore((state) => state.user);
+
     const [team, setTeam] = useState<(Pokemon | null)[]>([
       null,
       null,
@@ -107,6 +110,11 @@ const TeamBuilder = forwardRef<TeamBuilderRef, TeamBuilderProps>(
         return;
       }
 
+      if (!user?.trainerName) {
+        Alert.alert("Erro", "Você precisa estar logado para salvar um time!");
+        return;
+      }
+
       const pokemons = team.filter((p): p is Pokemon => p !== null);
 
       setSaving(true);
@@ -120,7 +128,7 @@ const TeamBuilder = forwardRef<TeamBuilderRef, TeamBuilderProps>(
           await updateTeam(editingTeamId, pokemonsToSend, teamName);
           Alert.alert("Sucesso", `Time "${teamName}" atualizado com sucesso!`);
         } else {
-          await createTeam(teamName, pokemonsToSend);
+          await createTeam(teamName, pokemonsToSend, user.trainerName);
           Alert.alert("Sucesso", `Time "${teamName}" criado com sucesso!`);
         }
 
