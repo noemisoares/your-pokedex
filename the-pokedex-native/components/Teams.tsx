@@ -132,6 +132,7 @@ const Times: React.FC<TimesProps> = ({ trainerName, onEditTeam }) => {
       renderItem={renderTeam}
       keyExtractor={(item) => item.objectId}
       contentContainerStyle={styles.listContainer}
+      style={styles.flatList}
     />
   );
 };
@@ -139,8 +140,11 @@ const Times: React.FC<TimesProps> = ({ trainerName, onEditTeam }) => {
 export default Times;
 
 const styles = StyleSheet.create({
+  flatList: {
+    flex: 1,
+  },
   listContainer: {
-    padding: 16,
+    paddingBottom: 16,
   },
   centered: {
     flex: 1,
@@ -154,6 +158,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: "#1e1e1e",
     marginBottom: 16,
+    marginHorizontal: 16,
   },
   teamName: {
     fontWeight: "bold",

@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  ScrollView,
-  ActivityIndicator,
-  StyleSheet,
-} from "react-native";
+import { View, Text, ActivityIndicator, StyleSheet } from "react-native";
 import { useUserStore } from "../../app/store/useUserStore";
 import Teams from "@/components/Teams";
 
@@ -14,8 +8,7 @@ export default function Perfil() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulando carregamento do perfil, pode ajustar se precisar buscar dados extras
-    const timer = setTimeout(() => setLoading(false), 500); // meia seg de delay
+    const timer = setTimeout(() => setLoading(false), 500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -41,20 +34,23 @@ export default function Perfil() {
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Perfil de {user.trainerName}</Text>
-
-      {/* Mostra apenas os times do usuário logado */}
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.title}>Perfil de {user.trainerName}</Text>
+      </View>
       <Teams trainerName={user.trainerName} />
-    </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    flex: 1,
     backgroundColor: "#0c0c0c",
-    flexGrow: 1,
+  },
+  header: {
+    padding: 16,
+    paddingBottom: 0,
   },
   centered: {
     flex: 1,
