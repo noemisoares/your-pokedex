@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Ionicons } from "@expo/vector-icons";
 import {
   View,
   Text,
@@ -57,6 +58,7 @@ const Sidebar: React.FC<Props> = ({ visible, onClose }) => {
   return (
     <Modal animationType="slide" visible={visible} transparent>
       <View style={styles.overlay}>
+        <TouchableOpacity style={styles.backdrop} onPress={onClose} />
         <View style={styles.container}>
           <View style={styles.header}>
             <Text style={styles.headerTitle}>Menu</Text>
@@ -80,12 +82,18 @@ const Sidebar: React.FC<Props> = ({ visible, onClose }) => {
           </View>
 
           <View style={styles.links}>
-            <Link href="/pokedex/page">
-              <Text style={styles.link}>Pokedex</Text>
+            <Link href="/pokedex/page" asChild>
+              <TouchableOpacity style={styles.linkItem}>
+                <Ionicons name="book" size={24} color="#4db152" />
+                <Text style={styles.link}>Pokedex</Text>
+              </TouchableOpacity>
             </Link>
 
-            <Link href="/perfil/page">
-              <Text style={styles.link}>Perfil</Text>
+            <Link href="/perfil/page" asChild>
+              <TouchableOpacity style={styles.linkItem}>
+                <Ionicons name="person" size={24} color="#4db152" />
+                <Text style={styles.link}>Perfil</Text>
+              </TouchableOpacity>
             </Link>
           </View>
 
@@ -93,19 +101,30 @@ const Sidebar: React.FC<Props> = ({ visible, onClose }) => {
 
           <View style={styles.authArea}>
             {user && !user.anonymous ? (
-              <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+              <TouchableOpacity
+                style={styles.logoutButton}
+                onPress={handleLogout}
+              >
                 <Text style={styles.logoutText}>Sair</Text>
               </TouchableOpacity>
             ) : (
               <>
                 <View style={styles.authToggle}>
-                  <TouchableOpacity onPress={() => setMode("login")}
-                    style={[styles.modeButton, mode === "login" && styles.modeActive]}
+                  <TouchableOpacity
+                    onPress={() => setMode("login")}
+                    style={[
+                      styles.modeButton,
+                      mode === "login" && styles.modeActive,
+                    ]}
                   >
                     <Text style={styles.modeText}>Login</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity onPress={() => setMode("signup")}
-                    style={[styles.modeButton, mode === "signup" && styles.modeActive]}
+                  <TouchableOpacity
+                    onPress={() => setMode("signup")}
+                    style={[
+                      styles.modeButton,
+                      mode === "signup" && styles.modeActive,
+                    ]}
                   >
                     <Text style={styles.modeText}>Criar Conta</Text>
                   </TouchableOpacity>
@@ -152,7 +171,9 @@ const Sidebar: React.FC<Props> = ({ visible, onClose }) => {
                   style={styles.loginButton}
                   onPress={mode === "login" ? handleLogin : handleSignup}
                 >
-                  <Text style={styles.loginButtonText}>{mode === "login" ? "Entrar" : "Criar Conta"}</Text>
+                  <Text style={styles.loginButtonText}>
+                    {mode === "login" ? "Entrar" : "Criar Conta"}
+                  </Text>
                 </TouchableOpacity>
               </>
             )}
@@ -164,7 +185,6 @@ const Sidebar: React.FC<Props> = ({ visible, onClose }) => {
             </View>
           )}
         </View>
-        <TouchableOpacity style={styles.backdrop} onPress={onClose} />
       </View>
     </Modal>
   );
@@ -181,24 +201,59 @@ const styles = StyleSheet.create({
     paddingTop: 36,
   },
   backdrop: { flex: 1, backgroundColor: "rgba(0,0,0,0.4)" },
-  header: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 12 },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 12,
+  },
   headerTitle: { color: "#fff", fontSize: 20, fontWeight: "bold" },
   close: { color: "#ccc" },
   userArea: { marginBottom: 12 },
   trainerName: { color: "#fff", fontSize: 18, fontWeight: "bold" },
   username: { color: "#aaa", marginTop: 4 },
   links: { marginTop: 8 },
-  link: { color: "#fff", fontSize: 16, paddingVertical: 8 },
+  linkItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 12,
+    paddingHorizontal: 8,
+    borderRadius: 8,
+    marginBottom: 4,
+  },
+  link: {
+    color: "#fff",
+    fontSize: 16,
+    marginLeft: 12,
+    fontWeight: "500",
+  },
   divider: { height: 1, backgroundColor: "#222", marginVertical: 12 },
   authArea: { flex: 1 },
   authToggle: { flexDirection: "row", marginBottom: 8 },
   modeButton: { flex: 1, padding: 8, alignItems: "center" },
   modeActive: { backgroundColor: "#222", borderRadius: 8 },
   modeText: { color: "#fff" },
-  input: { backgroundColor: "#222", color: "#fff", borderRadius: 8, padding: 8, marginBottom: 8 },
-  loginButton: { backgroundColor: "#4db152", padding: 12, borderRadius: 8, alignItems: "center", marginTop: 6 },
+  input: {
+    backgroundColor: "#222",
+    color: "#fff",
+    borderRadius: 8,
+    padding: 8,
+    marginBottom: 8,
+  },
+  loginButton: {
+    backgroundColor: "#4db152",
+    padding: 12,
+    borderRadius: 8,
+    alignItems: "center",
+    marginTop: 6,
+  },
   loginButtonText: { color: "#fff", fontWeight: "bold" },
-  logoutButton: { backgroundColor: "#e74c3c", padding: 12, borderRadius: 8, alignItems: "center" },
+  logoutButton: {
+    backgroundColor: "#e74c3c",
+    padding: 12,
+    borderRadius: 8,
+    alignItems: "center",
+  },
   logoutText: { color: "#fff", fontWeight: "bold" },
   footer: { paddingVertical: 8 },
   small: { color: "#aaa", fontSize: 12 },
