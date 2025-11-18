@@ -35,11 +35,6 @@ export const Header: React.FC = () => {
       <Sidebar visible={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
       <View style={styles.nav}>
-        {/* Hamburger / open sidebar */}
-        <TouchableOpacity onPress={() => setSidebarOpen(true)} style={styles.hamburger}>
-          <HamburgerIcon />
-        </TouchableOpacity>
-
         <Link href="/">
           <Image
             source={require("../assets/logo.png")}
@@ -48,21 +43,10 @@ export const Header: React.FC = () => {
           />
         </Link>
 
-        {/* Botão de tema */}
-        <TouchableOpacity
-          onPress={toggleTheme}
-          style={styles.themeButton}
-          accessibilityLabel="Alternar tema claro/escuro"
-        >
-          <Image
-            source={
-              darkMode
-                ? require("../assets/icons/ultra_ball.png")
-                : require("../assets/icons/great_ball.png")
-            }
-            style={styles.themeIcon}
-          />
+        <TouchableOpacity onPress={() => setSidebarOpen(true)} style={styles.hamburger}>
+          <HamburgerIcon />
         </TouchableOpacity>
+
       </View>
     </View>
   );
@@ -74,8 +58,9 @@ const getStyles = (theme: any) =>
       backgroundColor: theme.primary,
       borderBottomWidth: 1,
       borderBottomColor: theme.text,
-      paddingVertical: 8,
-      paddingHorizontal: 16,
+      paddingVertical: 10,
+      paddingTop: 36,
+      paddingHorizontal: 20,
     },
     nav: {
       flexDirection: "row",

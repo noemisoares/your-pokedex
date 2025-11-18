@@ -18,31 +18,46 @@ import {
 import { createTeam, updateTeam } from "../app/api/team";
 import { useUserStore } from "../app/store/useUserStore";
 
-const PokeballIcon = ({ size = 60 }: { size?: number }) => (
-  <View
-    style={{
-      width: size,
-      height: size,
-      borderRadius: size / 2,
-      borderWidth: 2,
-      borderColor: "#000",
-      backgroundColor: "#fff",
-      alignItems: "center",
-      justifyContent: "center",
-    }}
-  >
+const PokeballIcon = ({ size = 60 }: { size?: number }) => {
+  const border = size * 0.05;
+  const buttonSize = size * 0.35;
+
+  return (
     <View
       style={{
-        width: size * 0.6,
-        height: size * 0.6,
-        borderRadius: size * 0.3,
-        backgroundColor: "red",
-        borderWidth: 2,
+        width: size,
+        height: size,
+        borderRadius: size / 2,
+        overflow: "hidden",
+        borderWidth: border,
         borderColor: "#000",
+        position: "relative",
       }}
-    />
-  </View>
-);
+    >
+      <View style={{ flex: 1, backgroundColor: "red" }} />
+
+      <View style={{ height: size * 0.12, backgroundColor: "black" }} />
+
+      <View style={{ flex: 1, backgroundColor: "white" }} />
+
+      <View
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          width: buttonSize,
+          height: buttonSize,
+          marginLeft: -(buttonSize / 2),
+          marginTop: -(buttonSize / 2),
+          borderRadius: buttonSize / 2,
+          backgroundColor: "white",
+          borderWidth: border,
+          borderColor: "black",
+        }}
+      />
+    </View>
+  );
+};
 
 export type Pokemon = {
   id: string;
@@ -158,10 +173,12 @@ const TeamBuilder = forwardRef<TeamBuilderRef, TeamBuilderProps>(
 
     return (
       <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.title}>Seu Time</Text>
+        <Text style={styles.title}>Crie seu Time</Text>
         <TextInput
           placeholder="Nome do time"
+          placeholderTextColor="#888"
           value={teamName}
+          cursorColor="#888"
           onChangeText={setTeamName}
           style={styles.inputTrainer}
         />
@@ -213,11 +230,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
+    color: "#fff",
     fontSize: 22,
     fontWeight: "bold",
     marginBottom: 16,
   },
   inputTrainer: {
+    color: "#888",
     padding: 10,
     fontSize: 16,
     borderWidth: 1,
