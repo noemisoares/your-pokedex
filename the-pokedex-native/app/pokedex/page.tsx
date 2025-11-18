@@ -164,6 +164,7 @@ export default function Pokedex() {
           {user && !user.anonymous && (
             <TeamBuilder
               ref={teamBuilderRef}
+              editingTeamId={editingTeam ? editingTeam.objectId : undefined}
               initialTeam={editingTeam ? { pokemons: editingTeam.pokemons, name: editingTeam.teamName } : undefined}
             />
           )}

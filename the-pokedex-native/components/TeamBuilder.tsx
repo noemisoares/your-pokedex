@@ -83,6 +83,7 @@ export type TeamBuilderRef = {
 const TeamBuilder = forwardRef<TeamBuilderRef, TeamBuilderProps>(
   ({ editingTeamId, initialTeam }, ref) => {
     const user = useUserStore((state) => state.user);
+    const setEditingTeam = useUserStore((s) => s.setEditingTeam);
 
     const [team, setTeam] = useState<(Pokemon | null)[]>([
       null,
@@ -159,6 +160,12 @@ const TeamBuilder = forwardRef<TeamBuilderRef, TeamBuilderProps>(
         if (editingTeamId) {
           await updateTeam(editingTeamId, pokemonsToSend, teamName);
           Alert.alert("Sucesso", `Time "${teamName}" atualizado com sucesso!`);
+          // limpar edição atual
+          try {
+            setEditingTeam(null);
+          } catch (e) {
+            /* ignore */
+          }
         } else {
           await createTeam(teamName, pokemonsToSend, user.trainerName);
           Alert.alert("Sucesso", `Time "${teamName}" criado com sucesso!`);
