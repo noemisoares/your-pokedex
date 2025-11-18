@@ -25,11 +25,13 @@ interface User {
 interface UserStore {
   user: User | null;
   teams: Team[]; // times do treinador localmente
+  editingTeam?: Team | null;
   setUser: (user: User | null) => void;
   logout: () => void;
   setTeams: (teams: Team[]) => void;
   addTeam: (team: Team) => void;
   removeTeam: (objectId: string) => void;
+  setEditingTeam: (team: Team | null) => void;
 }
 
 export const useUserStore = create<UserStore>()(
@@ -37,17 +39,23 @@ export const useUserStore = create<UserStore>()(
     (set, get) => ({
       user: null,
       teams: [],
+      editingTeam: null,
       setUser: (user) => set({ user }),
       logout: () => set({ user: null }),
       setTeams: (teams) => set({ teams }),
       addTeam: (team) => set({ teams: [...get().teams, team] }),
       removeTeam: (objectId) =>
         set({ teams: get().teams.filter((t) => t.objectId !== objectId) }),
+      setEditingTeam: (team) => set({ editingTeam: team }),
     }),
     {
       name: "user-storage",
       storage: createJSONStorage(() => AsyncStorage),
-      partialize: (state) => ({ user: state.user, teams: state.teams }),
+      partialize: (state) => ({
+        user: state.user,
+        teams: state.teams,
+        editingTeam: state.editingTeam,
+      }),
     }
   )
 );

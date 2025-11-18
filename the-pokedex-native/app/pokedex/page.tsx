@@ -23,6 +23,8 @@ export default function Pokedex() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedType, setSelectedType] = useState("");
   const teamBuilderRef = useRef<any>(null);
+  const editingTeam = useUserStore((s) => s.editingTeam);
+  const setEditingTeam = useUserStore((s) => s.setEditingTeam);
 
   useEffect(() => {
     const fetchPokemonData = async () => {
@@ -61,6 +63,8 @@ export default function Pokedex() {
 
     fetchPokemonData();
   }, []);
+
+  
 
   useEffect(() => {
     let filtered = pokemons;
@@ -160,6 +164,7 @@ export default function Pokedex() {
           {user && !user.anonymous && (
             <TeamBuilder
               ref={teamBuilderRef}
+              initialTeam={editingTeam ? { pokemons: editingTeam.pokemons, name: editingTeam.teamName } : undefined}
             />
           )}
 

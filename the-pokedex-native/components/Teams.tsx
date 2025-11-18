@@ -34,6 +34,7 @@ const Times: React.FC<TimesProps> = ({ trainerName, onEditTeam }) => {
 
   const fetchTeams = useCallback(async () => {
     setLoading(true);
+    console.log("[Teams] fetchTeams called, trainerName=", trainerName);
     try {
       let response;
       if (trainerName) {
@@ -41,9 +42,10 @@ const Times: React.FC<TimesProps> = ({ trainerName, onEditTeam }) => {
       } else {
         response = await getAllTeams();
       }
+      console.log("[Teams] fetchTeams response:", response?.data);
       setTeams(response.data.results || []);
     } catch (error) {
-      console.error("Erro ao buscar times:", error);
+      console.error("[Teams] Erro ao buscar times:", error, "trainerName=", trainerName);
       setTeams([]);
     } finally {
       setLoading(false);
@@ -80,7 +82,10 @@ const Times: React.FC<TimesProps> = ({ trainerName, onEditTeam }) => {
 
       <View style={styles.buttonRow}>
         <TouchableOpacity
-          onPress={() => onEditTeam && onEditTeam(item)}
+          onPress={() => {
+            console.log("[Teams] onEditTeam pressed", item);
+            onEditTeam && onEditTeam(item);
+          }}
           style={styles.iconButton}
         >
           <Pencil size={20} color="#4db152" />

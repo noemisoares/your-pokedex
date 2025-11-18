@@ -65,8 +65,14 @@ export type Pokemon = {
   image: string;
 };
 
+type InitialTeam = {
+  pokemons: (Pokemon | null)[];
+  name: string;
+};
+
 type TeamBuilderProps = {
   editingTeamId?: string;
+  initialTeam?: InitialTeam | null;
 };
 
 export type TeamBuilderRef = {
@@ -75,7 +81,7 @@ export type TeamBuilderRef = {
 };
 
 const TeamBuilder = forwardRef<TeamBuilderRef, TeamBuilderProps>(
-  ({ editingTeamId }, ref) => {
+  ({ editingTeamId, initialTeam }, ref) => {
     const user = useUserStore((state) => state.user);
 
     const [team, setTeam] = useState<(Pokemon | null)[]>([
@@ -94,12 +100,23 @@ const TeamBuilder = forwardRef<TeamBuilderRef, TeamBuilderProps>(
       setMounted(true);
     }, []);
 
+    useEffect(() => {
+      console.log("[TeamBuilder] mounted, editingTeamId=", editingTeamId, "initialTeam=", initialTeam);
+    }, [editingTeamId, initialTeam]);
+
     const loadTeam = (pokemons: (Pokemon | null)[], name: string) => {
+      console.log("[TeamBuilder] loadTeam", name, pokemons);
       const fullTeam = [...pokemons];
       while (fullTeam.length < 6) fullTeam.push(null);
       setTeam(fullTeam);
       setTeamName(name);
     };
+
+    useEffect(() => {
+      if (initialTeam) {
+        loadTeam(initialTeam.pokemons, initialTeam.name);
+      }
+    }, [initialTeam]);
 
     const addPokemon = (pokemon: Pokemon) => {
       const index = team.findIndex((p) => p === null);
