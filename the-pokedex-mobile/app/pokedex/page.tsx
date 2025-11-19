@@ -11,21 +11,29 @@ import {
 } from "react-native";
 import axios from "axios";
 import { Link } from "expo-router";
-import TeamBuilder from "@/components/TeamBuilder";
+import TeamBuilder from "../../components/TeamBuilder";
 import { useUserStore } from "../store/useUserStore";
+
+interface Pokemon {
+  id: number;
+  name: string;
+  image: string;
+  types: any[];
+}
 
 export default function Pokedex() {
   const user = useUserStore((state) => state.user);
+  const editingTeam = useUserStore((s) => s.editingTeam);
+  const setEditingTeam = useUserStore((s) => s.setEditingTeam);
+  const teamBuilderRef = useRef<any>(null);
 
-  const [pokemons, setPokemons] = useState<any[]>([]);
-  const [filteredPokemons, setFilteredPokemons] = useState<any[]>([]);
+  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [filteredPokemons, setFilteredPokemons] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedType, setSelectedType] = useState("");
-  const teamBuilderRef = useRef<any>(null);
-  const editingTeam = useUserStore((s) => s.editingTeam);
-  const setEditingTeam = useUserStore((s) => s.setEditingTeam);
 
+  // Busca Pokémons
   useEffect(() => {
     const fetchPokemonData = async () => {
       try {
@@ -34,7 +42,7 @@ export default function Pokedex() {
         );
         const pokemonList = response.data.results;
 
-        const pokemonWithDetails = await Promise.all(
+        const pokemonWithDetails: Pokemon[] = await Promise.all(
           pokemonList.map(async (_pokemon: any, index: number) => {
             const id = index + 1;
             try {
@@ -44,10 +52,16 @@ export default function Pokedex() {
               return {
                 id,
                 name: detailResponse.data.name,
+                image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/${id}.png`,
                 types: detailResponse.data.types,
               };
             } catch {
-              return { id, name: `pokemon-${id}`, types: [] };
+              return {
+                id,
+                name: `pokemon-${id}`,
+                image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/${id}.png`,
+                types: [],
+              };
             }
           })
         );
@@ -64,34 +78,27 @@ export default function Pokedex() {
     fetchPokemonData();
   }, []);
 
+  // Filtro por busca e tipo
   useEffect(() => {
     let filtered = pokemons;
 
     if (searchTerm) {
-      filtered = filtered.filter((pokemon) =>
-        pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
+      filtered = filtered.filter((p) =>
+        p.name.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
     if (selectedType) {
-      filtered = filtered.filter((pokemon) =>
-        pokemon.types.some((t: any) => t.type.name === selectedType)
+      filtered = filtered.filter((p) =>
+        p.types.some((t: any) => t.type.name === selectedType)
       );
     }
 
     setFilteredPokemons(filtered);
   }, [searchTerm, selectedType, pokemons]);
 
-  const handleAddToTeam = (poke: any) => {
-    const pokeData = {
-      id: poke.id,
-      name: poke.name,
-      image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/${poke.id}.png`,
-    };
-
-    if (teamBuilderRef.current) {
-      teamBuilderRef.current.addPokemon(pokeData);
-    }
+  const handleAddToTeam = (poke: Pokemon) => {
+    if (teamBuilderRef.current) teamBuilderRef.current.addPokemon(poke);
   };
 
   const capitalize = (str: string) =>
@@ -122,24 +129,8 @@ export default function Pokedex() {
   };
 
   const allTypes = [
-    "normal",
-    "fire",
-    "water",
-    "electric",
-    "grass",
-    "ice",
-    "fighting",
-    "poison",
-    "ground",
-    "flying",
-    "psychic",
-    "bug",
-    "rock",
-    "ghost",
-    "dragon",
-    "dark",
-    "steel",
-    "fairy",
+    "normal","fire","water","electric","grass","ice","fighting","poison",
+    "ground","flying","psychic","bug","rock","ghost","dragon","dark","steel","fairy",
   ];
 
   if (loading) {
@@ -166,8 +157,12 @@ export default function Pokedex() {
               initialTeam={
                 editingTeam
                   ? {
-                      pokemons: editingTeam.pokemons,
                       name: editingTeam.teamName,
+                      pokemons: editingTeam.pokemons.map((p) => ({
+                        id: String(p.id),
+                        name: p.name,
+                        image: p.image,
+                      })),
                     }
                   : undefined
               }
@@ -204,55 +199,50 @@ export default function Pokedex() {
           />
         </>
       }
-      renderItem={({ item: poke }) => {
-        const img = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/${poke.id}.png`;
+      renderItem={({ item: poke }) => (
+        <View style={styles.card}>
+          <Link
+            href={{
+              pathname: "/pokedex/[id]/page",
+              params: { id: poke.id.toString() },
+            }}
+            asChild
+          >
+            <TouchableOpacity style={styles.cardLink}>
+              <Image
+                source={{ uri: poke.image }}
+                style={styles.pokemonImage}
+                resizeMode="contain"
+              />
+              <Text style={styles.pokemonName}>{capitalize(poke.name)}</Text>
+              <View style={styles.types}>
+                {poke.types.map((t, idx) => (
+                  <View
+                    key={idx}
+                    style={[
+                      styles.typeTag,
+                      { backgroundColor: getTypeColor(t.type.name) },
+                    ]}
+                  >
+                    <Text style={styles.typeText}>
+                      {capitalize(t.type.name)}
+                    </Text>
+                  </View>
+                ))}
+              </View>
+            </TouchableOpacity>
+          </Link>
 
-        return (
-          <View style={styles.card}>
-            <Link
-              href={{
-                pathname: "/pokedex/[id]/page",
-                params: { id: poke.id.toString() },
-              }}
-              asChild
+          {user && !user.anonymous && (
+            <TouchableOpacity
+              onPress={() => handleAddToTeam(poke)}
+              style={styles.saveButton}
             >
-              <TouchableOpacity style={styles.cardLink}>
-                <Image
-                  source={{ uri: img }}
-                  style={styles.pokemonImage}
-                  resizeMode="contain"
-                />
-                <Text style={styles.pokemonName}>{capitalize(poke.name)}</Text>
-
-                <View style={styles.types}>
-                  {poke.types.map((t: any, idx: number) => (
-                    <View
-                      key={idx}
-                      style={[
-                        styles.typeTag,
-                        { backgroundColor: getTypeColor(t.type.name) },
-                      ]}
-                    >
-                      <Text style={styles.typeText}>
-                        {capitalize(t.type.name)}
-                      </Text>
-                    </View>
-                  ))}
-                </View>
-              </TouchableOpacity>
-            </Link>
-
-            {user && !user.anonymous && (
-              <TouchableOpacity
-                onPress={() => handleAddToTeam(poke)}
-                style={styles.saveButton}
-              >
-                <Text style={styles.saveButtonText}>Adicionar ao Time</Text>
-              </TouchableOpacity>
-            )}
-          </View>
-        );
-      }}
+              <Text style={styles.saveButtonText}>Adicionar ao Time</Text>
+            </TouchableOpacity>
+          )}
+        </View>
+      )}
     />
   );
 }

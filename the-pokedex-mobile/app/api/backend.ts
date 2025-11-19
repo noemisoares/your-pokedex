@@ -21,11 +21,6 @@ export interface Team {
   pokemons: Pokemon[];
 }
 
-/* =========================
-      🧾  FUNÇÕES DE LOGIN / CADASTRO
-   ========================= */
-
-// Criação de usuário (signup)
 export async function createUser(
   username: string, // deve começar com "@"
   trainerName: string,
@@ -33,7 +28,6 @@ export async function createUser(
   password: string
 ) {
   try {
-    // Validar que o username começa com "@"
     if (!username.startsWith("@")) {
       throw new Error('O username deve começar com "@"');
     }
@@ -53,15 +47,12 @@ export async function createUser(
   }
 }
 
-// Login via username + password
 export async function loginUser(username: string, password: string) {
   try {
-    // Login usando endpoint oficial do Parse
     const response = await instance.get("/login", {
       params: { username: username.trim(), password },
     });
 
-    // Retorna dados importantes do usuário
     return {
       objectId: response.data.objectId,
       username: response.data.username,
@@ -77,10 +68,6 @@ export async function loginUser(username: string, password: string) {
     throw new Error("Username ou senha incorretos.");
   }
 }
-
-/* =========================
-      🧩  FUNÇÕES POKÉMON / TIMES
-   ========================= */
 
 export async function savePokemon(pokemon: Pokemon) {
   try {
