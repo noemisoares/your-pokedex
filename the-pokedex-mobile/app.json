@@ -1,11 +1,11 @@
 {
   "expo": {
     "name": "Your Pokedex",
-    "slug": "the-pokedex-native",
+    "slug": "the-pokedex-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/pokeicon.png",
-    "scheme": "thepokedexnative",
+    "scheme": "thepokedexmobile",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
