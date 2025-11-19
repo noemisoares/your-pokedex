@@ -84,14 +84,14 @@ const Sidebar: React.FC<Props> = ({ visible, onClose }) => {
           <View style={styles.links}>
             <Link href="/pokedex/page" asChild>
               <TouchableOpacity style={styles.linkItem}>
-                <Ionicons name="book" size={24} color="#4db152" />
+                <Ionicons name="book" size={24} color="#e74c3c" />
                 <Text style={styles.link}>Pokedex</Text>
               </TouchableOpacity>
             </Link>
 
             <Link href="/perfil/page" asChild>
               <TouchableOpacity style={styles.linkItem}>
-                <Ionicons name="person" size={24} color="#4db152" />
+                <Ionicons name="person" size={24} color="#e74c3c" />
                 <Text style={styles.link}>Perfil</Text>
               </TouchableOpacity>
             </Link>
@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   loginButton: {
-    backgroundColor: "#4db152",
+    backgroundColor: "#e74c3c",
     padding: 12,
     borderRadius: 8,
     alignItems: "center",

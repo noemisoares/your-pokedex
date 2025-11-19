@@ -8,7 +8,7 @@ export interface Pokemon {
   image: string;
 }
 
-interface Team {
+export interface Team {
   objectId?: string;
   teamName: string;
   pokemons: Pokemon[];

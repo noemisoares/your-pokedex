@@ -22,7 +22,7 @@ export interface Team {
 }
 
 export async function createUser(
-  username: string, // deve começar com "@"
+  username: string,
   trainerName: string,
   email: string,
   password: string

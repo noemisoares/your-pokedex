@@ -1,37 +1,14 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  ScrollView,
-  TextInput,
-  Alert,
-  Modal,
-} from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from "react-native";
 import { useRouter } from "expo-router";
-import { createUser, loginUser } from "./api/backend";
-import { useUserStore } from "./store/useUserStore";
 import Pokeball from "../components/Pokeball";
 
 export default function Home() {
   const router = useRouter();
-  const setUser = useUserStore((state) => state.setUser);
-  const [modalVisible, setModalVisible] = useState<"login" | "signup" | null>(
-    null
-  );
-  const [username, setUsername] = useState("");
-  const [trainerName, setTrainerName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-
+    const timer = setTimeout(() => setIsLoading(false), 3000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -43,30 +20,6 @@ export default function Home() {
       </View>
     );
   }
-
-  const handleSignup = async () => {
-    try {
-      await createUser(username, trainerName, email, password);
-      Alert.alert(
-        "Conta criada!",
-        "Agora você pode logar com seu username e senha."
-      );
-      setModalVisible(null);
-    } catch (err: any) {
-      Alert.alert("Erro", err.message);
-    }
-  };
-
-  const handleLogin = async () => {
-    try {
-      const user = await loginUser(username, password);
-      setUser(user);
-      Alert.alert("Bem-vindo!", `Olá ${user.trainerName}`);
-      router.push("/perfil/page");
-    } catch (err: any) {
-      Alert.alert("Erro no login", err.message);
-    }
-  };
 
   return (
     <ScrollView contentContainerStyle={styles.home}>
@@ -83,6 +36,7 @@ export default function Home() {
         </Text>
       </View>
 
+      {/* Imagens de fundo */}
       <Image
         source={require("../assets/images/pikachu.png")}
         style={[styles.pokemonBg, styles.pikachuBg]}
@@ -107,74 +61,11 @@ export default function Home() {
       <View style={styles.buttonsWrapper}>
         <TouchableOpacity
           style={[styles.button, { paddingVertical: 18 }]}
-          onPress={() => {
-            router.push("/pokedex/page");
-          }}
+          onPress={() => router.push("/pokedex/page")}
         >
           <Text style={[styles.buttonText, { fontSize: 20 }]}>POKEDEX</Text>
         </TouchableOpacity>
       </View>
-
-      <Modal visible={modalVisible !== null} animationType="slide" transparent>
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>
-              {modalVisible === "login" ? "Login" : "Criar Conta"}
-            </Text>
-            {modalVisible === "signup" && (
-              <>
-                <TextInput
-                  placeholder="Nome do treinador"
-                  style={styles.input}
-                  value={trainerName}
-                  onChangeText={setTrainerName}
-                />
-              </>
-            )}
-            <TextInput
-              placeholder={
-                modalVisible === "login" ? "Username (@...)" : "Username (@...)"
-              }
-              style={styles.input}
-              value={username}
-              onChangeText={setUsername}
-            />
-            {modalVisible === "signup" && (
-              <TextInput
-                placeholder="E-mail"
-                style={styles.input}
-                value={email}
-                onChangeText={setEmail}
-              />
-            )}
-            <TextInput
-              placeholder="Senha"
-              style={styles.input}
-              secureTextEntry
-              value={password}
-              onChangeText={setPassword}
-            />
-
-            <TouchableOpacity
-              style={[styles.button, { marginTop: 12 }]}
-              onPress={modalVisible === "login" ? handleLogin : handleSignup}
-            >
-              <Text style={styles.buttonText}>
-                {modalVisible === "login" ? "Entrar" : "Criar Conta"}
-              </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={() => setModalVisible(null)}
-              style={{ marginTop: 8 }}
-            >
-              <Text style={{ color: "#ccc", textAlign: "center" }}>
-                Cancelar
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
     </ScrollView>
   );
 }
@@ -198,25 +89,10 @@ const styles = StyleSheet.create({
     marginTop: 24,
     zIndex: 2,
   },
-  titulinho: {
-    fontSize: 28,
-    fontWeight: "bold",
-    color: "#fff",
-    marginBottom: 8,
-  },
-  logo: {
-    width: 300,
-    height: 120,
-    marginBottom: 12,
-  },
-  subtitle: {
-    color: "#ccc",
-    fontSize: 16,
-  },
-  buttonsWrapper: {
-    marginTop: 40,
-    width: "80%",
-  },
+  titulinho: { fontSize: 28, fontWeight: "bold", color: "#fff", marginBottom: 8 },
+  logo: { width: 300, height: 120, marginBottom: 12 },
+  subtitle: { color: "#ccc", fontSize: 16 },
+  buttonsWrapper: { marginTop: 40, width: "80%" },
   button: {
     backgroundColor: "rgba(48,48,48,0.8)",
     paddingVertical: 12,
@@ -224,55 +100,13 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginVertical: 6,
   },
-  buttonText: {
-    fontSize: 18,
-    color: "#fff",
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  pokemonBg: {
-    position: "absolute",
-    opacity: 0.9,
-    zIndex: 0,
-  },
+  buttonText: { fontSize: 18, color: "#fff", fontWeight: "bold", textAlign: "center" },
+  pokemonBg: { position: "absolute", opacity: 0.9, zIndex: 0 },
   pikachuBg: { top: "80%", left: "10%", width: 150, height: 150 },
   charmanderBg: { top: "85%", left: "40%", width: 180, height: 180 },
   squirtleBg: { top: "85%", left: "65%", width: 170, height: 170 },
   pokedexBg: { top: "55%", left: "60%", width: 400, height: 400 },
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: "rgba(0,0,0,0.7)",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  modalContent: {
-    backgroundColor: "#1e1e1e",
-    borderRadius: 12,
-    padding: 20,
-    width: "85%",
-  },
-  modalTitle: {
-    fontSize: 22,
-    fontWeight: "bold",
-    color: "#fff",
-    marginBottom: 12,
-    textAlign: "center",
-  },
-  input: {
-    backgroundColor: "#2a2a2a",
-    color: "#fff",
-    borderRadius: 8,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    marginVertical: 6,
-  },
-  loadingContainer: {
-    flex: 1,
-    backgroundColor: "#0c0c0c",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingHorizontal: 20,
-  },
+  loadingContainer: { flex: 1, backgroundColor: "#0c0c0c", justifyContent: "center", alignItems: "center", paddingHorizontal: 20 },
   loadingTitle: {
     fontSize: 24,
     fontWeight: "bold",
