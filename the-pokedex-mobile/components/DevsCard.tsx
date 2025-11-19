@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity, StyleSheet } from "react-native";
+import { Text, TouchableOpacity, StyleSheet, Image, View } from "react-native";
 import { router } from "expo-router";
 import { Dev } from "../app/store/useDevs";
 
@@ -9,30 +9,68 @@ type Props = {
 export default function DevCard({ dev }: Props) {
   function openProfile() {
     router.push({
-        pathname: "/devs/[id]/page",
-        params: { id: dev.id },
+      pathname: "/devs/[id]/page",
+      params: { id: dev.id },
     });
   }
 
+  const ballMap: Record<string, string> = {
+    noemi: "master-ball",
+    willian: "great-ball",
+    ricardo: "ultra-ball",
+    pedro: "premier-ball",
+    artur: "luxury-ball",
+  };
+
+  const ballImageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${ballMap[dev.id]}.png`;
+
   return (
     <TouchableOpacity style={styles.card} onPress={openProfile}>
-      <Text style={styles.name}>{dev.name}</Text>
-      <Text style={styles.username}>{dev.username}</Text>
-      <Text style={styles.more}>Ver perfil →</Text>
+      <View style={styles.row}>
+        <View style={{ flex: 1 }}>
+          <Text style={styles.name}>{dev.name}</Text>
+          <Text style={styles.username}>{dev.username}</Text>
+          <Text style={styles.more}>Ver perfil →</Text>
+        </View>
+
+        <Image source={{ uri: ballImageUrl }} style={styles.ball} />
+      </View>
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: "#1b1b1f",
-    marginBottom: 16,
+    backgroundColor: "#101015",
+    marginBottom: 15,
     padding: 20,
-    borderRadius: 12,
-    borderColor: "#444",
+    borderRadius: 16,
+    borderColor: "#3a3a3d",
     borderWidth: 1,
+    elevation: 6,
   },
-  name: { color: "#fff", fontSize: 18, fontWeight: "600" },
-  username: { color: "#aaa", fontSize: 14, marginTop: 4 },
-  more: { color: "#4db152", marginTop: 12, fontWeight: "600" },
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  name: { 
+    color: "#fff", 
+    fontSize: 20, 
+    fontWeight: "700" 
+  },
+  username: { 
+    color: "#888", 
+    fontSize: 14, 
+    marginTop: 4 
+  },
+  more: { 
+    color: "#d12727d6", 
+    marginTop: 12, 
+    fontWeight: "600" 
+  },
+  ball: {
+    width: 60,
+    height: 60,
+    marginLeft: 10,
+  },
 });
