@@ -64,8 +64,6 @@ export default function Pokedex() {
     fetchPokemonData();
   }, []);
 
-  
-
   useEffect(() => {
     let filtered = pokemons;
 
@@ -165,7 +163,14 @@ export default function Pokedex() {
             <TeamBuilder
               ref={teamBuilderRef}
               editingTeamId={editingTeam ? editingTeam.objectId : undefined}
-              initialTeam={editingTeam ? { pokemons: editingTeam.pokemons, name: editingTeam.teamName } : undefined}
+              initialTeam={
+                editingTeam
+                  ? {
+                      pokemons: editingTeam.pokemons,
+                      name: editingTeam.teamName,
+                    }
+                  : undefined
+              }
             />
           )}
 

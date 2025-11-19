@@ -1,6 +1,3 @@
-// theme.ts
-// Equivalente do globals.css no React Native + Expo
-
 export const lightTheme = {
   primary: "#0a2b4a",
   secondary: "#fcfcfc",
@@ -21,10 +18,8 @@ export const darkTheme = {
   title: "#dad9d9",
 };
 
-// Tipo de tema
 export type ThemeType = typeof lightTheme;
 
-// Hook simples para trocar o tema (pode ser aprimorado com Context futuramente)
 import { useColorScheme } from "react-native";
 
 export const useTheme = (): ThemeType => {

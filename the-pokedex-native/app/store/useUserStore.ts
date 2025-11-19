@@ -24,7 +24,7 @@ interface User {
 
 interface UserStore {
   user: User | null;
-  teams: Team[]; // times do treinador localmente
+  teams: Team[];
   editingTeam?: Team | null;
   setUser: (user: User | null) => void;
   logout: () => void;

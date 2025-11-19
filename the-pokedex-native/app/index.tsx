@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -13,6 +13,7 @@ import {
 import { useRouter } from "expo-router";
 import { createUser, loginUser } from "./api/backend";
 import { useUserStore } from "./store/useUserStore";
+import Pokeball from "../components/Pokeball";
 
 export default function Home() {
   const router = useRouter();
@@ -24,6 +25,24 @@ export default function Home() {
   const [trainerName, setTrainerName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <Pokeball size={120} />
+        <Text style={styles.loadingTitle}>Seja Bem-Vindo Treinador!</Text>
+      </View>
+    );
+  }
 
   const handleSignup = async () => {
     try {
@@ -87,9 +106,8 @@ export default function Home() {
 
       <View style={styles.buttonsWrapper}>
         <TouchableOpacity
-          style={[styles.button, { paddingVertical: 18 } ]}
+          style={[styles.button, { paddingVertical: 18 }]}
           onPress={() => {
-            // acessar Pokedex — marca como anônimo se não houver usuário
             router.push("/pokedex/page");
           }}
         >
@@ -247,5 +265,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 8,
     marginVertical: 6,
+  },
+  loadingContainer: {
+    flex: 1,
+    backgroundColor: "#0c0c0c",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 20,
+  },
+  loadingTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#FFF",
+    marginTop: 20,
+    textAlign: "center",
+    textShadowColor: "rgba(0, 0, 0, 0.8)",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 3,
+    lineHeight: 28,
   },
 });

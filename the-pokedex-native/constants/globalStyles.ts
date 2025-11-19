@@ -1,6 +1,3 @@
-// globalStyles.ts
-// Estilos genéricos inspirados no seu globals.css
-
 import { StyleSheet } from "react-native";
 import { useTheme } from "./theme";
 

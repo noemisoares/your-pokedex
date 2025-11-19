@@ -102,7 +102,12 @@ const TeamBuilder = forwardRef<TeamBuilderRef, TeamBuilderProps>(
     }, []);
 
     useEffect(() => {
-      console.log("[TeamBuilder] mounted, editingTeamId=", editingTeamId, "initialTeam=", initialTeam);
+      console.log(
+        "[TeamBuilder] mounted, editingTeamId=",
+        editingTeamId,
+        "initialTeam=",
+        initialTeam
+      );
     }, [editingTeamId, initialTeam]);
 
     const loadTeam = (pokemons: (Pokemon | null)[], name: string) => {

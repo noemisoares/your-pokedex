@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, ActivityIndicator, StyleSheet } from "react-native";
-import { useUserStore } from "../../app/store/useUserStore";
+import { useUserStore } from "../store/useUserStore";
 import Teams from "@/components/Teams";
 import { useRouter } from "expo-router";
 
@@ -47,7 +47,10 @@ export default function Perfil() {
         <Teams
           trainerName={user.trainerName}
           onEditTeam={(team) => {
-            console.log("[Perfil] onEditTeam -> set editingTeam and navigate", team);
+            console.log(
+              "[Perfil] onEditTeam -> set editingTeam and navigate",
+              team
+            );
             setEditingTeam(team);
             router.push("/pokedex/page");
           }}
