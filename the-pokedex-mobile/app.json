@@ -19,7 +19,8 @@
         "monochromeImage": "./assets/pokeicon.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.noemisoares.thepokedexmobile"
     },
     "web": {
       "output": "static",
@@ -43,6 +44,18 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "f5f20c84-a1a1-4fc1-a00a-e46a2f976f59"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/f5f20c84-a1a1-4fc1-a00a-e46a2f976f59"
     }
   }
 }
