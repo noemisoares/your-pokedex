@@ -33,7 +33,6 @@ export default function Pokedex() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedType, setSelectedType] = useState("");
 
-  // Busca Pokémons
   useEffect(() => {
     const fetchPokemonData = async () => {
       try {
@@ -78,7 +77,6 @@ export default function Pokedex() {
     fetchPokemonData();
   }, []);
 
-  // Filtro por busca e tipo
   useEffect(() => {
     let filtered = pokemons;
 

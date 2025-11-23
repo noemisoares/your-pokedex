@@ -58,6 +58,11 @@ export default function AboutPage() {
           <Ionicons name="code-slash" size={20} color="#4db152" />
           <Text style={styles.techText}>TypeScript</Text>
         </View>
+
+        <View style={styles.techItem}>
+          <Ionicons name="layers-outline" size={20} color="#fffc3bff" />
+          <Text style={styles.techText}>Zustand (Gerenciamento)</Text>
+        </View>
       </View>
 
       <View style={styles.card}>

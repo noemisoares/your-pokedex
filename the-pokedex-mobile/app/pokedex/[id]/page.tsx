@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
     alignItems: "center",
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "#131313ff",
   },
   centered: {
     flex: 1,
@@ -199,12 +199,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   card: {
-    backgroundColor: "#fff",
+    backgroundColor: "#333",
     borderRadius: 15,
     padding: 20,
     width: "100%",
     alignItems: "center",
-    shadowColor: "#000",
+    shadowColor: "#888888ff",
     shadowOpacity: 0.1,
     shadowOffset: { width: 0, height: 4 },
     shadowRadius: 8,
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     marginBottom: 15,
-    color: "#222",
+    color: "#fff",
   },
   pokemonImage: {
     width: 180,
@@ -229,21 +229,21 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     marginBottom: 10,
-    color: "#333",
+    color: "#fdfdfdff",
   },
   statItem: {
     flexDirection: "row",
     justifyContent: "space-between",
     paddingVertical: 4,
     borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
+    borderBottomColor: "#cccccc9b",
   },
   statLabel: {
-    color: "#444",
+    color: "#fcfcfcdc",
     textTransform: "capitalize",
   },
   statValue: {
-    color: "#000",
+    color: "#fcfcfcdc",
     fontWeight: "bold",
   },
   moves: {
@@ -256,7 +256,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   moveItem: {
-    backgroundColor: "#cfdcea",
+    backgroundColor: "#dfe0e1ff",
     borderRadius: 20,
     paddingHorizontal: 10,
     paddingVertical: 6,
@@ -300,7 +300,7 @@ const styles = StyleSheet.create({
   evolutionArrow: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#222",
+    color: "#f0f0f0ff",
     marginHorizontal: 5,
   },
 });

@@ -38,6 +38,7 @@ export async function createUser(
       email: email.trim().toLowerCase(),
       password,
     });
+
     return response.data;
   } catch (error: any) {
     console.error("Erro ao criar usuário:", error.response?.data || error);
@@ -49,8 +50,15 @@ export async function createUser(
 
 export async function loginUser(username: string, password: string) {
   try {
+    if (!username.startsWith("@")) {
+      username = "@" + username;
+    }
+
     const response = await instance.get("/login", {
-      params: { username: username.trim(), password },
+      params: {
+        username: username.trim(),
+        password,
+      },
     });
 
     return {
@@ -93,6 +101,24 @@ export async function saveTeam(teamName: string, pokemons: Pokemon[]) {
   } catch (error) {
     console.error("Erro ao salvar time:", error);
     throw error;
+  }
+}
+
+export async function getAllUsers() {
+  try {
+    const response = await instance.get("/users", {
+      headers: {
+        "X-Parse-Master-Key": "wsurq86d5ClUVn8HzrkSQ9RKWlJx2CDPEEBfabms",
+      },
+    });
+
+    return response.data.results;
+  } catch (error: any) {
+    console.error(
+      "Erro ao buscar usuários:",
+      error.response?.data || error.message || error
+    );
+    throw new Error("Não foi possível carregar a lista de usuários.");
   }
 }
 
