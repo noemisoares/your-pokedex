@@ -71,7 +71,7 @@ export default function PokemonDetail() {
   if (loading) {
     return (
       <View style={styles.centered}>
-        <ActivityIndicator size="large" color="#4db152" />
+        <ActivityIndicator size="large" color="#e11309ad" />
         <Text style={styles.loadingText}>Carregando...</Text>
       </View>
     );
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   backButton: {
-    backgroundColor: "#4db152",
+    backgroundColor: "#c61006ab",
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 10,
@@ -280,7 +280,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   evolutionCard: {
-    backgroundColor: "#4db152",
+    backgroundColor: "#c61006ab",
     padding: 10,
     borderRadius: 12,
     alignItems: "center",

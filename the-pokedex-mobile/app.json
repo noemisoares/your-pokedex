@@ -14,9 +14,7 @@
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/pokeicon.png",
-        "backgroundImage": "./assets/pokeicon.png",
-        "monochromeImage": "./assets/pokeicon.png"
+        "foregroundImage": "./assets/pokeicon.png"
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,

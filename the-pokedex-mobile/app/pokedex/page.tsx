@@ -134,7 +134,7 @@ export default function Pokedex() {
   if (loading) {
     return (
       <View style={styles.loading}>
-        <ActivityIndicator size="large" color="#ffcb05" />
+        <ActivityIndicator size="large" color="#e11309ad" />
         <Text style={styles.loadingText}>Carregando Pokémon...</Text>
       </View>
     );
@@ -277,7 +277,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#333",
     marginRight: 8,
   },
-  typeButtonActive: { backgroundColor: "#ffcb05" },
+  typeButtonActive: { backgroundColor: "#e11309ad" },
   typeButtonText: { color: "#fff", fontWeight: "bold", fontSize: 14 },
   card: {
     backgroundColor: "#1e1e1e",
