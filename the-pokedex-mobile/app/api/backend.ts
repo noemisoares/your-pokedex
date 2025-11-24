@@ -69,7 +69,7 @@ export async function loginUser(username: string, password: string) {
       sessionToken: response.data.sessionToken,
     };
   } catch (error: any) {
-    console.error(
+    console.warn(
       "Erro no login:",
       error.response?.data || error.message || error
     );
